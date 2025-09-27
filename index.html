@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makanan Khas Manado</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cards-container">
+        <div class="card chef tinutuan-new">
+            <div class="cakalang-image" onclick="triggerUpload('tinutuan')">
+                <img src="assets/tinutuan.jpg" alt="Tinutuan Bubur Manado">
+                <div class="upload-overlay">Change Bubur Manado Image</div>
+                <input type="file" class="file-input" accept="image/*" onchange="handleImageUpload(event, 'tinutuan')">
+            </div>
+            <h2 class="cakalang-name">Tinutuan / Bubur Manado</h2>
+            <p class="cakalang-desc">
+                Tinutuan adalah bubur khas Manado dengan banyak sayuran, sehat dan bergizi.
+            </p>
+        </div>
+
+        <div class="card rating">
+            <h2>Makanan Khas Manado</h2>
+        </div>
+
+        <div class="card chef kanari-new">
+            <div class="cakalang-image" onclick="triggerUpload('kanari')">
+                <img src="assets/kanari.jpg" alt="Kanari Manado Image">
+                <div class="upload-overlay">Change Kanari Image</div>
+                <input type="file" class="file-input" accept="image/*" onchange="handleImageUpload(event, 'kanari')">
+            </div>
+            <h2 class="cakalang-name">Kue Kanari</h2>
+            <p class="cakalang-desc">
+                Kue Kanari (Bagea Kanari) adalah kue kering khas Manado yang terbuat dari sagu dan kacang kenari, memiliki tekstur renyah dan gurih.
+            </p>
+        </div>
+
+        <div class="card chef">
+            <div class="cakalang-image" onclick="triggerUpload('cakalang')">
+                <img src="assets/cakalangfufu.jpg" alt="Cakalang Fufu Image">
+                <div class="upload-overlay">Change Cakalang Fufu</div>
+                <input type="file" class="file-input" accept="image/*" onchange="handleImageUpload(event, 'cakalang')">
+            </div>
+            <h2 class="cakalang-name">Cakalang Fufu</h2>
+            <p class="cakalang-desc">
+                Hidangan ikan cakalang yang dibumbui dan diasapi hingga kering. Oleh-oleh khas Manado yang gurih dan lezat, sering disajikan dengan sambal dabu-dabu.
+            </p>
+        </div>
+
+        <div class="card panada">
+            <h2 class="panada-title">Panada</h2>
+            <div class="panada-image" onclick="triggerUpload('panada')">
+                <img src="assets/panada.jpg" alt="Kue Panada">
+                <div class="upload-overlay">Change Panada Image</div>
+                <input type="file" class="file-input" accept="image/*" onchange="handleImageUpload(event, 'panada')">
+            </div>
+            <p class="panada-desc">
+                Panada adalah roti goreng khas Manado yang diisi dengan ikan cakalang pedas. 
+                Bentuknya mirip pastel, namun rotinya lebih empuk. 
+                Camilan gurih dan lezat ini sangat populer di Sulawesi Utara.
+            </p>
+        </div>
+
+        <div class="card panada klappertaart-new">
+            <h2 class="panada-title">Klappertaart</h2>
+            <div class="panada-image" onclick="triggerUpload('klappertaart')">
+                <img src="assets/klappertaart.jpg" alt="Klappertaart">
+                <div class="upload-overlay">Change Klappertaart Image</div>
+                <input type="file" class="file-input" accept="image/*" onchange="handleImageUpload(event, 'klappertaart')">
+            </div>
+            <p class="panada-desc">
+                Klappertaart adalah kue tradisional Manado yang terbuat dari kelapa muda, susu, dan telur. 
+                Rasanya manis dan lembut dengan tekstur yang creamy. 
+                Kue ini merupakan pengaruh budaya Belanda yang telah menjadi bagian dari kuliner khas Sulawesi Utara.
+            </p>
+        </div>
+
+        <div class="empty-slot"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
