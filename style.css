@@ -1,0 +1,348 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #1a3b3a;
+    color: #ffffff;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    position: relative;
+}
+
+.edit-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5);
+}
+
+.central-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+}
+
+.logo-text {
+    font-size: 72px;
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: 3px;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, #ff6b35, #f39c12);
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-areas: 
+        "tinutuan-new rating kanari-new"
+        "chef panada klappertaart-new" 
+        "empty-slot . ."; 
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 20px;
+    height: 100vh;
+    padding: 20px;
+}
+
+.card {
+    border-radius: 25px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.chef {
+    grid-area: chef;
+    background: #333;
+    color: white;
+    text-align: center;
+    position: relative;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cakalang-image {
+    width: 100%;
+    max-width: 220px;
+    height: 150px;
+    background: #555;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    cursor: pointer;
+    position: relative;
+}
+
+.cakalang-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cakalang-name {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ff6b35;
+    margin-bottom: 10px;
+}
+
+.cakalang-desc {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0 10px;
+    line-height: 1.4;
+}
+
+.tinutuan-new {
+    grid-area: tinutuan-new;
+    background: linear-gradient(135deg, #ff6b35 0%, #f39c12 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.tinutuan-new .cakalang-name {
+    color: white;
+}
+
+.tinutuan-new .cakalang-desc {
+    color: white;
+}
+
+.kanari-new {
+    grid-area: kanari-new;
+    background: #4A2E1F;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.kanari-new .cakalang-name {
+    color: #FFD700;
+}
+
+.kanari-new .cakalang-desc {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.panada {
+    grid-area: panada;
+    background: linear-gradient(135deg, #f39c12 0%, #ffc300 100%);
+    color: #333;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    border-radius: 25px;
+    padding: 20px;
+}
+
+.panada-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.panada-image {
+    width: 100%;
+    max-width: 220px;
+    height: 150px;
+    background: #666;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    cursor: pointer;
+    position: relative;
+    border: 3px solid white;
+}
+
+.panada-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.panada-desc {
+    font-size: 14px;
+    color: #333;
+    padding: 0 10px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.klappertaart-new {
+    grid-area: klappertaart-new;
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.rating {
+    grid-area: rating;
+    background: #4CAF50;
+    text-align: center;
+    border: none;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.rating h2 {
+    color: white;
+    font-size: 42px; 
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+
+.empty-slot {
+    grid-area: empty-slot;
+    background: #1a3b3a;
+    box-shadow: none;
+    cursor: default;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-input {
+    display: none;
+}
+
+.upload-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: white;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+.edit-mode .upload-overlay {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.placeholder-image {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #666 0%, #444 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    font-size: 14px;
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .cards-container {
+        grid-template-areas: 
+            "tinutuan-new rating"
+            "kanari-new empty-slot" 
+            "chef panada"
+            "klappertaart-new .";
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+    
+    .logo-text {
+        font-size: 48px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cards-container {
+        grid-template-areas: 
+            "tinutuan-new"
+            "rating"
+            "kanari-new"
+            "chef"
+            "panada"
+            "klappertaart-new"
+            "empty-slot";
+        grid-template-columns: 1fr;
+    }
+    
+    .logo-text {
+        font-size: 36px;
+    }
+}
+
+.header-box-besar {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4CAF50;
+    padding: 30px 80px;
+    border-radius: 25px;
+    z-index: 1000;
+    width: 400px;
+}
+
+.header-box-besar h1 {
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
