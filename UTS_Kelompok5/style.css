@@ -6,64 +6,214 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: #1a3b3a;
+    background: #1a3b3a; 
     color: #ffffff;
     overflow-x: hidden;
     min-height: 100vh;
 }
 
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    position: relative;
-}
-
-.edit-toggle:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5);
-}
-
-.central-logo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
+/* =========================================================
+   bagian pertama halaman pembuka mirip header
+   ========================================================= */
+#hero-intro {
+    height: 100vh;
+    background-image: url('assets/manado-view.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: center;
     text-align: center;
+    color: #ffffff; 
+    position: relative;
+    padding: 0 40px;
 }
 
-.logo-text {
-    font-size: 72px;
-    font-weight: bold;
-    color: #ffffff;
-    letter-spacing: 3px;
-    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+#hero-intro::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
 
-.logo-icon {
-    width: 40px;
-    height: 40px;
+#hero-intro > * {
+    position: relative;
+    z-index: 2;
+}
+
+.navbar-hero {
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin-bottom: 100px; 
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+}
+
+.logo-hero {
+    width: 60px;
+    height: 60px;
     background: linear-gradient(45deg, #ff6b35, #f39c12);
     border-radius: 50%;
-    margin: 0 auto 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-weight: bold;
+    font-size: 30px;
+    margin-right: 15px;
+}
+
+.brand-text {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-shadow: 0 1px 5px rgba(0,0,0,0.7);
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 16px;
+    transition: color 0.3s ease;
+    text-shadow: 0 1px 5px rgba(0,0,0,0.7);
+}
+
+.nav-links a:hover {
+    color: #ff6b35;
+}
+
+.hero-text-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 180px);
+    width: 100%;
+}
+
+.hero-text-center h1 {
+    font-size: 4vw; 
+    font-weight: 900;
+    letter-spacing: 8px;
+    color: #ff6b35;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+    margin-bottom: 10px;
+}
+
+.hero-text-center p {
+    font-size: 1.8vw;
+    color: #f39c12;
+    margin-bottom: 40px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+#scroll-button {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: #ff6b35;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(255, 107, 53, 0.5);
+}
+
+#scroll-button:hover {
+    background: #f39c12;
+    transform: translateY(-2px);
+}
+
+.typing-text {
+    width: 0; 
+    overflow: hidden; 
+    white-space: nowrap; 
+    border-right: 0.15em solid #ffffff; 
+    animation: 
+        typing 4s steps(21) forwards, 
+        blink 0.75s step-end infinite; 
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink {
+    from, to { border-color: transparent }
+    50% { border-color: #ffffff }
+}
+
+
+@media (max-width: 1024px) {
+    .hero-text-center h1 {
+        font-size: 7vw; 
+        letter-spacing: 5px;
+    }
+    .hero-text-center p {
+        font-size: 3vw;
+    }
+    .nav-links {
+        display: none; 
+    }
+    .navbar-hero {
+        justify-content: center;
+    }
+}
+
+#main-content {
+    padding: 40px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.top-left-search {
+    position: sticky; 
+    top: 20px; 
+    z-index: 100; 
+    width: 300px; 
+    margin-bottom: 40px;
+}
+
+#food-search {
+    width: 100%;
+    padding: 10px 15px;
+    border: 3px solid #ff6b35;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #333;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#food-search:focus {
+    outline: none;
+    border-color: #f39c12;
+    box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
 }
 
 .cards-container {
     display: grid;
-    grid-template-areas: 
-        "tinutuan-new rating kanari-new"
-        "chef panada klappertaart-new" 
-        "empty-slot . ."; 
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    height: 100vh;
     padding: 20px;
 }
 
@@ -72,9 +222,14 @@ body {
     padding: 30px;
     position: relative;
     overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.4s ease;
+    min-height: 300px;
 }
 
 .card:hover {
@@ -83,19 +238,11 @@ body {
 }
 
 .chef {
-    grid-area: chef;
     background: #333;
     color: white;
-    text-align: center;
-    position: relative;
-    min-height: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
-.cakalang-image {
+.card-image-container {
     width: 100%;
     max-width: 220px;
     height: 150px;
@@ -107,242 +254,193 @@ body {
     position: relative;
 }
 
-.cakalang-image img {
+.card-image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.cakalang-name {
-    font-size: 32px;
+.card-title {
+    font-size: 24px;
     font-weight: bold;
     color: #ff6b35;
     margin-bottom: 10px;
 }
 
-.cakalang-desc {
+.card-description {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.8);
     padding: 0 10px;
     line-height: 1.4;
+    flex-grow: 1; 
 }
 
-.tinutuan-new {
-    grid-area: tinutuan-new;
-    background: linear-gradient(135deg, #ff6b35 0%, #f39c12 100%);
+/* =========================================================
+   style setiap kartu
+   ========================================================= */
+.tinutuan-new { background: linear-gradient(135deg, #ff6b35 0%, #f39c12 100%); }
+.tinutuan-new .card-title, .tinutuan-new .card-description { color: white; }
+.dabu-dabu-new { background: linear-gradient(135deg, #1c7e7b 0%, #155e5b 100%); color: white; }
+.dabu-dabu-new .card-title { color: #f39c12; }
+.dabu-dabu-new .card-description { color: rgba(255, 255, 255, 0.9); }
+.kanari-new { background: #4A2E1F; color: white; }
+.kanari-new .card-title { color: #FFD700; }
+.kanari-new .card-description { color: rgba(255, 255, 255, 0.9); }
+.panada { background: linear-gradient(135deg, #f39c12 0%, #ffc300 100%); color: #333; }
+.panada .card-title { color: white; }
+.panada .card-image-container { border: 3px solid white; }
+.panada .card-description { color: #333; font-weight: 500; }
+.klappertaart-new { background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%); }
+.brenebon-new { background: linear-gradient(135deg, #a52a2a 0%, #800000 100%); color: white; }
+.brenebon-new .card-title { color: #ffc300; }
+.brenebon-new .card-description { color: rgba(255, 255, 255, 0.9); }
+.ikantude-new { background: linear-gradient(135deg, #4682B4 0%, #2A4A6E 100%); color: white; }
+.ikantude-new .card-title { color: #FFD700; }
+.ikantude-new .card-description { color: rgba(255, 255, 255, 0.9); }
+.sambalroa-new { background: linear-gradient(135deg, #D35400 0%, #A93226 100%); color: white; }
+.sambalroa-new .card-title { color: #FDEBD0; }
+.sambalroa-new .card-description { color: rgba(255, 255, 255, 0.9); }
+.ayamwoku-new { background: linear-gradient(135deg, #F9A825 0%, #FDD835 100%); color: #3E2723; }
+.ayamwoku-new .card-title { color: #A15C00; }
+.ayamwoku-new .card-description { color: #3E2723; font-weight: 500; }
+.ayamricarica-new { background: linear-gradient(135deg, #E53935 0%, #B71C1C 100%); color: white; }
+.ayamricarica-new .card-title { color: #FFEB3B; }
+.ayamricarica-new .card-description { color: rgba(255, 255, 255, 0.95); font-weight: 500; }
+.ayamtinoransak-new { background: linear-gradient(135deg, #556B2F 0%, #2F4F4F 100%); color: white; }
+.ayamtinoransak-new .card-title { color: #DAA520; }
+.ayamtinoransak-new .card-description { color: rgba(255, 255, 255, 0.95); font-weight: 500; }
+.ragey-new { background: linear-gradient(135deg, #795548 0%, #4E342E 100%); color: white; }
+.ragey-new .card-title { color: #FFCC80; }
+.ragey-new .card-description { color: rgba(255, 255, 255, 0.95); font-weight: 500; }
+.paniki-new { background: linear-gradient(135deg, #483D8B 0%, #2F2F4F 100%); color: white; }
+.paniki-new .card-title { color: #E6E6FA; }
+.paniki-new .card-description { color: rgba(255, 255, 255, 0.95); font-weight: 500; }
+.rahangtuna-new { background: linear-gradient(135deg, #00838F 0%, #004D40 100%); color: white; }
+.rahangtuna-new .card-title { color: #E0F7FA; }
+.rahangtuna-new .card-description { color: rgba(255, 255, 255, 0.95); font-weight: 500; }
+.rintewuuk-new { background: linear-gradient(135deg, #BF360C 0%, #795548 100%); color: white; }
+.rintewuuk-new .card-title { color: #F5EFE6; }
+.rintewuuk-new .card-description { color: rgba(255, 255, 255, 0.95); font-weight: 500; }
+.lalampa-new { background: linear-gradient(135deg, #8B4513 0%, #5D2F0C 100%); color: white; }
+.lalampa-new .card-title { color: #FFDEAD; }
+.lalampa-new .card-description { color: rgba(255, 255, 255, 0.95); font-weight: 500; }
+.nasijaha-new { background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%); color: white; }
+.nasijaha-new .card-title { color: #C8E6C9; }
+.nasijaha-new .card-description { color: rgba(255, 255, 255, 0.95); font-weight: 500; }
+.kuelampu-new { background: linear-gradient(135deg, #81C784 0%, #4CAF50 100%); color: white; }
+.kuelampu-new .card-title { color: #E8F5E9; }
+.kuelampu-new .card-description { color: rgba(255, 255, 255, 0.95); font-weight: 500; }
+.kacanggoyang-new { background: linear-gradient(135deg, #EC407A 0%, #D81B60 100%); color: white; }
+.kacanggoyang-new .card-title { color: #FCE4EC; }
+.kacanggoyang-new .card-description { color: rgba(255, 255, 255, 0.95); font-weight: 500; }
+
+/* =========================================================
+   style untuk tombol filter rasa
+   ========================================================= */
+.taste-filters { display: flex; gap: 10px; margin: -20px 0 30px 20px; max-width: 1400px; }
+.taste-filters button { padding: 8px 16px; font-size: 14px; font-weight: bold; color: #ffffff; background-color: transparent; border: 2px solid #f39c12; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; }
+.taste-filters button:hover { background-color: #f39c12; color: #1a3b3a; }
+.taste-filters button.active { background-color: #ff6b35; border-color: #ff6b35; color: #ffffff; box-shadow: 0 0 10px rgba(255, 107, 53, 0.5); }
+
+/* =========================================================
+   style untuk bagian komentar
+   ========================================================= */
+.toggle-comments-btn { background-color: rgba(255, 255, 255, 0.2); color: inherit; border: 1px solid rgba(255, 255, 255, 0.5); padding: 8px 12px; border-radius: 15px; cursor: pointer; margin-top: 15px; font-weight: bold; transition: background-color 0.3s; }
+.toggle-comments-btn:hover { background-color: rgba(255, 255, 255, 0.4); }
+.panada .toggle-comments-btn, .ayamwoku-new .toggle-comments-btn { background-color: rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.4); }
+.comments-section { width: 100%; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.2); text-align: left; max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; scrollbar-width: thin; scrollbar-color: #ff6b35 #333; }
+.comments-section.hidden { display: none; }
+.comments-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.comments-list .comment-item { background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 5px; line-height: 1.4; word-wrap: break-word; position: relative; }
+.comments-list .no-comment { background: transparent; opacity: 0.7; text-align: center; padding: 10px; }
+.comment-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; font-size: 12px; }
+.comment-date { opacity: 0.6; }
+.comment-text { font-size: 13px; margin: 0; color: inherit; opacity: 0.9; }
+.comment-form { display: flex; gap: 5px; margin-top: 5px; position: sticky; bottom: -1px; background: inherit; padding-bottom: 5px; }
+.comment-input { flex-grow: 1; padding: 8px; border-radius: 5px; border: none; font-size: 13px; color: #333; }
+.comment-form button { padding: 8px 10px; border: none; background-color: #ff6b35; color: white; border-radius: 5px; cursor: pointer; font-size: 13px; font-weight: bold; }
+.comment-form button:hover { background-color: #f39c12; }
+
+/*===========================================================
+kelas helper untuk javascript
+   =========================================================*/
+.card.hidden-initial { opacity: 0; transform: translateY(50px) scale(0.9); transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1); }
+.card.is-hidden { display: none; }
+.card.is-fading-out { opacity: 0 !important; transform: scale(0.95) !important; transition: opacity 0.4s ease, transform 0.4s ease; }
+
+/* =========================================================
+   style untuk modal pop-up
+   ========================================================= */
+.modal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; z-index: 3000; padding: 20px; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0s linear 0.4s; }
+.modal-container.is-visible { opacity: 1; visibility: visible; transition: opacity 0.4s ease; }
+.modal-content { background: white; color: #333; padding: 0; border-radius: 15px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); max-width: 800px; width: 100%; max-height: 90vh; overflow: hidden; position: relative; transform: scale(0.9); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.modal-container.is-visible .modal-content { transform: scale(1); }
+.modal-close { position: absolute; top: 10px; right: 20px; font-size: 32px; font-weight: bold; color: #888; cursor: pointer; transition: transform 0.2s ease, color 0.2s ease; z-index: 10; }
+.modal-close:hover { transform: scale(1.2); color: #000; }
+.modal-grid { display: grid; grid-template-columns: 40% 60%; width: 100%; height: 100%; max-height: 90vh; }
+.modal-image-side { background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; }
+.modal-image-side img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.modal-text-side { padding: 30px 40px; overflow-y: auto; }
+.modal-text-side h2 { font-size: 28px; color: #333; margin-bottom: 20px; font-weight: 700; }
+.modal-text-side h3 { font-size: 16px; color: #ff6b35; margin-top: 20px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+.modal-text-side p { font-size: 15px; line-height: 1.7; color: #555; }
+@media (max-width: 768px) { .modal-grid { grid-template-columns: 1fr; } .modal-image-side { height: 200px; } .modal-text-side { padding: 20px 25px; } }
+
+/* =========================================================
+   style untuk tombol hapus komentar
+   ========================================================= */
+.delete-comment-btn { position: absolute; top: 5px; right: 5px; width: 20px; height: 20px; border-radius: 50%; border: none; background-color: rgba(255, 0, 0, 0.6); color: white; font-size: 14px; font-weight: bold; line-height: 20px; text-align: center; cursor: pointer; opacity: 0; transition: opacity 0.2s ease, background-color 0.2s ease; }
+.comment-item:hover .delete-comment-btn { opacity: 1; }
+.delete-comment-btn:hover { background-color: rgba(255, 0, 0, 0.9); }
+
+/* Gaya untuk tombol reset agar mirip tombol filter */
+#reset-filters {
+    border-color: #f35d59;
+}
+#reset-filters:hover {
+    background-color: #f35d59;
+    border-color: #f35d59;
+    color: white;
+}
+
+/* Gaya untuk Like/Dislike agar transparan dan interaktif */
+.comment-actions {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 20px;
+    gap: 5px;
+    margin-top: 8px;
 }
 
-.tinutuan-new .cakalang-name {
-    color: white;
-}
-
-.tinutuan-new .cakalang-desc {
-    color: white;
-}
-
-.kanari-new {
-    grid-area: kanari-new;
-    background: #4A2E1F;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 20px;
-}
-
-.kanari-new .cakalang-name {
-    color: #FFD700;
-}
-
-.kanari-new .cakalang-desc {
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.panada {
-    grid-area: panada;
-    background: linear-gradient(135deg, #f39c12 0%, #ffc300 100%);
-    color: #333;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 300px;
-    border-radius: 25px;
-    padding: 20px;
-}
-
-.panada-title {
-    font-size: 32px;
-    font-weight: bold;
-    color: white;
-    margin-bottom: 15px;
-}
-
-.panada-image {
-    width: 100%;
-    max-width: 220px;
-    height: 150px;
-    background: #666;
-    border-radius: 15px;
-    overflow: hidden;
-    margin-bottom: 15px;
+.vote-btn {
+    background-color: transparent; /* Membuat latar belakang transparan */
+    border: none; /* Menghilangkan border */
     cursor: pointer;
-    position: relative;
-    border: 3px solid white;
+    font-size: 16px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    color: white; 
+    opacity: 0.8;
 }
 
-.panada-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.panada-desc {
-    font-size: 14px;
-    color: #333;
-    padding: 0 10px;
-    line-height: 1.4;
-    font-weight: 500;
-}
-
-.klappertaart-new {
-    grid-area: klappertaart-new;
-    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 20px;
-}
-
-.rating {
-    grid-area: rating;
-    background: #4CAF50;
-    text-align: center;
-    border: none;
-    min-height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.rating h2 {
-    color: white;
-    font-size: 42px; 
-    font-weight: bold;
-    text-align: center;
-    margin: 0;
-}
-
-.empty-slot {
-    grid-area: empty-slot;
-    background: #1a3b3a;
-    box-shadow: none;
-    cursor: default;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.file-input {
-    display: none;
-}
-
-.upload-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    color: white;
-    font-weight: bold;
-    pointer-events: none;
-}
-
-.edit-mode .upload-overlay {
+.vote-btn:hover {
+    transform: scale(1.2);
     opacity: 1;
-    pointer-events: all;
+    background-color: rgba(0, 0, 0, 0.2); /* Efek highlight saat disentuh */
 }
 
-.placeholder-image {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #666 0%, #444 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ccc;
-    font-size: 14px;
-    text-align: center;
-}
-
-@media (max-width: 1024px) {
-    .cards-container {
-        grid-template-areas: 
-            "tinutuan-new rating"
-            "kanari-new empty-slot" 
-            "chef panada"
-            "klappertaart-new .";
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
-    }
-    
-    .logo-text {
-        font-size: 48px;
-    }
-}
-
-@media (max-width: 768px) {
-    .cards-container {
-        grid-template-areas: 
-            "tinutuan-new"
-            "rating"
-            "kanari-new"
-            "chef"
-            "panada"
-            "klappertaart-new"
-            "empty-slot";
-        grid-template-columns: 1fr;
-    }
-    
-    .logo-text {
-        font-size: 36px;
-    }
-}
-
-.header-box-besar {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #4CAF50;
-    padding: 30px 80px;
-    border-radius: 25px;
-    z-index: 1000;
-    width: 400px;
-}
-
-.header-box-besar h1 {
-    color: white;
-    font-size: 32px;
+.vote-count {
+    font-size: 12px;
     font-weight: bold;
-    text-align: center;
-    margin: 0;
+    min-width: 15px;
+    text-align: left;
+    margin-right: 10px;
+    opacity: 0.9;
+}
+
+/* Gaya untuk tombol vote yang sedang aktif/dipilih */
+.vote-btn.active {
+    background-color: rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+    opacity: 1;
 }

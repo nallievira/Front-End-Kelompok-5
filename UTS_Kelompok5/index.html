@@ -7,78 +7,257 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="cards-container">
-        <div class="card chef tinutuan-new">
-            <div class="cakalang-image" onclick="triggerUpload('tinutuan')">
-                <img src="assets/tinutuan.jpg" alt="Tinutuan Bubur Manado">
-                <div class="upload-overlay">Change Bubur Manado Image</div>
-                <input type="file" class="file-input" accept="image/*" onchange="handleImageUpload(event, 'tinutuan')">
+    
+    <div id="hero-intro">
+        <header class="navbar-hero">
+            <div class="logo-area">
+                <div class="logo-hero"><div class="logo-icon">M</div></div>
+                <span class="brand-text">KULINER MANADO</span>
             </div>
-            <h2 class="cakalang-name">Tinutuan / Bubur Manado</h2>
-            <p class="cakalang-desc">
-                Tinutuan adalah bubur khas Manado dengan banyak sayuran, sehat dan bergizi.
-            </p>
+            <nav class="nav-links">
+                <a href="#main-content">Menu Utama</a>
+                <a href="#main-content">Tentang</a>
+            </nav>
+        </header>
+        <div class="hero-text-center">
+            <h1 class="typing-text">MAKANAN KHAS MANADO</h1>
+            <p>Jelajahi makanan khas manado berserta sejarahnya!</p>
+            <button id="scroll-button" onclick="document.getElementById('main-content').scrollIntoView({ behavior: 'smooth' });">
+                Jelajahi Menu
+            </button>
         </div>
-
-        <div class="card rating">
-            <h2>Makanan Khas Manado</h2>
-        </div>
-
-        <div class="card chef kanari-new">
-            <div class="cakalang-image" onclick="triggerUpload('kanari')">
-                <img src="assets/kanari.jpg" alt="Kanari Manado Image">
-                <div class="upload-overlay">Change Kanari Image</div>
-                <input type="file" class="file-input" accept="image/*" onchange="handleImageUpload(event, 'kanari')">
-            </div>
-            <h2 class="cakalang-name">Kue Kanari</h2>
-            <p class="cakalang-desc">
-                Kue Kanari (Bagea Kanari) adalah kue kering khas Manado yang terbuat dari sagu dan kacang kenari, memiliki tekstur renyah dan gurih.
-            </p>
-        </div>
-
-        <div class="card chef">
-            <div class="cakalang-image" onclick="triggerUpload('cakalang')">
-                <img src="assets/cakalangfufu.jpg" alt="Cakalang Fufu Image">
-                <div class="upload-overlay">Change Cakalang Fufu</div>
-                <input type="file" class="file-input" accept="image/*" onchange="handleImageUpload(event, 'cakalang')">
-            </div>
-            <h2 class="cakalang-name">Cakalang Fufu</h2>
-            <p class="cakalang-desc">
-                Hidangan ikan cakalang yang dibumbui dan diasapi hingga kering. Oleh-oleh khas Manado yang gurih dan lezat, sering disajikan dengan sambal dabu-dabu.
-            </p>
-        </div>
-
-        <div class="card panada">
-            <h2 class="panada-title">Panada</h2>
-            <div class="panada-image" onclick="triggerUpload('panada')">
-                <img src="assets/panada.jpg" alt="Kue Panada">
-                <div class="upload-overlay">Change Panada Image</div>
-                <input type="file" class="file-input" accept="image/*" onchange="handleImageUpload(event, 'panada')">
-            </div>
-            <p class="panada-desc">
-                Panada adalah roti goreng khas Manado yang diisi dengan ikan cakalang pedas. 
-                Bentuknya mirip pastel, namun rotinya lebih empuk. 
-                Camilan gurih dan lezat ini sangat populer di Sulawesi Utara.
-            </p>
-        </div>
-
-        <div class="card panada klappertaart-new">
-            <h2 class="panada-title">Klappertaart</h2>
-            <div class="panada-image" onclick="triggerUpload('klappertaart')">
-                <img src="assets/klappertaart.jpg" alt="Klappertaart">
-                <div class="upload-overlay">Change Klappertaart Image</div>
-                <input type="file" class="file-input" accept="image/*" onchange="handleImageUpload(event, 'klappertaart')">
-            </div>
-            <p class="panada-desc">
-                Klappertaart adalah kue tradisional Manado yang terbuat dari kelapa muda, susu, dan telur. 
-                Rasanya manis dan lembut dengan tekstur yang creamy. 
-                Kue ini merupakan pengaruh budaya Belanda yang telah menjadi bagian dari kuliner khas Sulawesi Utara.
-            </p>
-        </div>
-
-        <div class="empty-slot"></div>
     </div>
 
+    <div id="main-content">
+        <div class="top-left-search">
+            <input type="text" id="food-search" placeholder="Cari Makanan...">
+        </div>
+
+        <div class="taste-filters">
+            <button data-taste="gurih">Gurih</button>
+            <button data-taste="pedas">Pedas</button>
+            <button data-taste="manis">Manis</button>
+        </div>
+
+        <div class="cards-container">
+            <div class="card chef tinutuan-new" data-tastes="gurih" data-image-type="tinutuan">
+                <div class="card-image-container" data-image-type="tinutuan"><img src="assets/tinutuan.jpg" alt="Tinutuan Bubur Manado"></div>
+                <h2 class="card-title">Tinutuan / Bubur Manado</h2>
+                <p class="card-description">Tinutuan adalah bubur khas Manado dengan banyak sayuran, sehat dan bergizi.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card dabu-dabu-new" data-tastes="pedas,gurih" data-image-type="dabu-dabu">
+                <div class="card-image-container" data-image-type="dabu-dabu"><img src="assets/sambal dabu dabu.jpg" alt="Sambal Dabu-Dabu"></div>
+                <h2 class="card-title">Dabu-Dabu</h2>
+                <p class="card-description">Sambal segar khas Manado yang dibuat dari irisan cabai, bawang, dan tomat.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card kanari-new" data-tastes="manis,gurih" data-image-type="kanari">
+                <div class="card-image-container" data-image-type="kanari"><img src="assets/kanari.jpg" alt="Kanari Manado Image"></div>
+                <h2 class="card-title">Kue Kanari</h2>
+                <p class="card-description">Kue kering khas Manado yang terbuat dari sagu dan kacang kenari.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card chef" data-tastes="gurih" data-image-type="cakalang">
+                <div class="card-image-container" data-image-type="cakalang"><img src="assets/cakalangfufu.jpg" alt="Cakalang Fufu Image"></div>
+                <h2 class="card-title">Cakalang Fufu</h2>
+                <p class="card-description">Hidangan ikan cakalang yang dibumbui, dijepit, dan diasapi hingga kering.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card panada" data-tastes="pedas,gurih" data-image-type="panada">
+                <div class="card-image-container" data-image-type="panada"><img src="assets/panada.jpg" alt="Kue Panada"></div>
+                <h2 class="card-title">Panada</h2>
+                <p class="card-description">Roti goreng khas Manado yang diisi dengan ikan cakalang pedas.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card klappertaart-new" data-tastes="manis" data-image-type="klappertaart">
+                <div class="card-image-container" data-image-type="klappertaart"><img src="assets/klappertaart.jpg" alt="Klappertaart"></div>
+                <h2 class="card-title">Klappertaart</h2>
+                <p class="card-description">Kue manis dan lembut berbahan dasar kelapa muda, susu, dan telur.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card brenebon-new" data-tastes="gurih" data-image-type="brenebon">
+                <div class="card-image-container" data-image-type="brenebon"><img src="assets/brenebon.jpeg" alt="Sup Brenebon"></div>
+                <h2 class="card-title">Sup Brenebon</h2>
+                <p class="card-description">Sup kacang merah khas Manado yang gurih dan menghangatkan.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card ikantude-new" data-tastes="pedas,gurih" data-image-type="ikantude">
+                <div class="card-image-container" data-image-type="ikantude"><img src="assets/ikantude.jpg" alt="Ikan Tude Bakar"></div>
+                <h2 class="card-title">Ikan Tude Bakar</h2>
+                <p class="card-description">Ikan kembung (tude) bakar disajikan dengan sambal dabu-dabu.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card sambalroa-new" data-tastes="pedas,gurih" data-image-type="sambalroa">
+                <div class="card-image-container" data-image-type="sambalroa"><img src="assets/sambalroa.jpg" alt="Sambal Roa"></div>
+                <h2 class="card-title">Sambal Roa</h2>
+                <p class="card-description">Sambal khas dari ikan roa asap yang dihaluskan, pedas dan gurih.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card ayamwoku-new" data-tastes="pedas,gurih" data-image-type="ayamwoku">
+                <div class="card-image-container" data-image-type="ayamwoku"><img src="assets/ayamwoku.jpg" alt="Ayam Woku"></div>
+                <h2 class="card-title">Ayam Woku</h2>
+                <p class="card-description">Ayam dengan bumbu rempah melimpah, pedas, dan sangat aromatik.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card ayamricarica-new" data-tastes="pedas,gurih" data-image-type="ayamricarica">
+                <div class="card-image-container" data-image-type="ayamricarica"><img src="assets/ayamricarica.jpg" alt="Ayam Rica-Rica"></div>
+                <h2 class="card-title">Ayam Rica-Rica</h2>
+                <p class="card-description">Hidangan ayam super pedas di mana 'rica' berarti 'cabai'.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card ayamtinoransak-new" data-tastes="pedas,gurih" data-image-type="ayamtinoransak">
+                <div class="card-image-container" data-image-type="ayamtinoransak"><img src="assets/ayamtinoransak.jpg" alt="Ayam Tinoransak"></div>
+                <h2 class="card-title">Ayam Tinoransak</h2>
+                <p class="card-description">Ayam yang dimasak dalam bambu dengan bumbu rempah pedas.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card ragey-new" data-tastes="pedas,gurih" data-image-type="ragey">
+                <div class="card-image-container" data-image-type="ragey"><img src="assets/ragey.jpg" alt="Ragey"></div>
+                <h2 class="card-title">Ragey</h2>
+                <p class="card-description">Sate babi khas Manado berukuran besar dengan bumbu pedas.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card paniki-new" data-tastes="pedas,gurih" data-image-type="paniki">
+                <div class="card-image-container" data-image-type="paniki"><img src="assets/paniki.jpg" alt="Paniki"></div>
+                <h2 class="card-title">Paniki</h2>
+                <p class="card-description">Hidangan ekstrem dari kelelawar dengan bumbu santan pedas.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card rahangtuna-new" data-tastes="gurih,pedas" data-image-type="rahangtuna">
+                <div class="card-image-container" data-image-type="rahangtuna"><img src="assets/rahangtuna.jpg" alt="Rahang Tuna Bakar"></div>
+                <h2 class="card-title">Rahang Tuna Bakar</h2>
+                <p class="card-description">Bagian kepala ikan tuna yang dibakar, tebal dan juicy.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card rintewuuk-new" data-tastes="gurih,pedas" data-image-type="rintewuuk">
+                <div class="card-image-container" data-image-type="rintewuuk"><img src="assets/rintewuuk.jpg" alt="Rintek Wuuk"></div>
+                <h2 class="card-title">Rintek Wuuk</h2>
+                <p class="card-description">Hidangan ekstrem dari semut rangrang dan larvanya.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card lalampa-new" data-tastes="gurih,pedas" data-image-type="lalampa">
+                <div class="card-image-container" data-image-type="lalampa"><img src="assets/lalampa.jpg" alt="Lalampa"></div>
+                <h2 class="card-title">Lalampa</h2>
+                <p class="card-description">Kudapan gurih dari beras ketan diisi ikan cakalang, dibungkus daun pisang lalu dibakar.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card nasijaha-new" data-tastes="gurih" data-image-type="nasijaha">
+                <div class="card-image-container" data-image-type="nasijaha"><img src="assets/nasijaha.jpg" alt="Nasi Jaha"></div>
+                <h2 class="card-title">Nasi Jaha</h2>
+                <p class="card-description">Beras ketan dan santan yang dimasak dalam bambu berlapis daun pisang.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card kuelampu-new" data-tastes="manis,gurih" data-image-type="kuelampu">
+                <div class="card-image-container" data-image-type="kuelampu"><img src="assets/kuelampu.jpg" alt="Kue Lampu-Lampu"></div>
+                <h2 class="card-title">Kue Lampu-Lampu</h2>
+                <p class="card-description">Kue basah lembut dari santan dan tepung beras dengan wadah daun pandan.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+            <div class="card kacanggoyang-new" data-tastes="manis,gurih" data-image-type="kacanggoyang">
+                <div class="card-image-container" data-image-type="kacanggoyang"><img src="assets/kacanggoyang.jpg" alt="Kacang Goyang"></div>
+                <h2 class="card-title">Kacang Goyang</h2>
+                <p class="card-description">Kacang tanah renyah bersalut gula manis berwarna-warni khas Kotamobagu.</p>
+                <button class="toggle-comments-btn">Opini Pengguna</button>
+                <div class="comments-section hidden">
+                    <ul class="comments-list"></ul>
+                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+    <div id="food-modal" class="modal-container">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-grid">
+                <div class="modal-image-side"><img id="modal-image" src="" alt="Gambar Makanan Detail"></div>
+                <div class="modal-text-side">
+                    <h2 id="modal-title"></h2>
+                    <h3>Deskripsi</h3>
+                    <p id="modal-description"></p>
+                    <h3>Sejarah</h3>
+                    <p id="modal-history"></p>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
