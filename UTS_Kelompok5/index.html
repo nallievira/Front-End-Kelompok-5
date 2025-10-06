@@ -4,243 +4,431 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Makanan Khas Manado</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ephesis&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/lemon-milk" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/coolvetica" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     
-    <div id="hero-intro">
-        <header class="navbar-hero">
-            <div class="logo-area">
-                <div class="logo-hero"><div class="logo-icon">M</div></div>
-                <span class="brand-text">KULINER MANADO</span>
+    <div id="screen-intro">
+        <div class="screen-text-center">
+            <div class="screen-title-wrapper">
+                <h2 class="screen-title-rasa">Rasa</h2>
+                <h1 class="screen-title-manado">MANADO</h1>
             </div>
-            <nav class="nav-links">
-                <a href="#main-content">Menu Utama</a>
-                <a href="#main-content">Tentang</a>
-            </nav>
-        </header>
-        <div class="hero-text-center">
-            <h1 class="typing-text">MAKANAN KHAS MANADO</h1>
-            <p>Jelajahi makanan khas manado berserta sejarahnya!</p>
-            <button id="scroll-button" onclick="document.getElementById('main-content').scrollIntoView({ behavior: 'smooth' });">
-                Jelajahi Menu
-            </button>
+            <p class="hero-subtitle" id="heroSubtitle">Jelajahi cita rasamu di Manado dan temukan sejarah dibalik setiap rasa.</p>
         </div>
     </div>
 
+    <!-- top navbar -->
+    <div class="top-nav-bar" id="topNavBar">
+        <nav class="top-nav-content">
+            <!--link navigasi -->
+            <div class="nav-menu" id="navMenu">
+                <a href="#tentang-rasa" class="top-nav-item" id="tentangRasaNav">Tentang Rasa</a>
+                <a href="#" class="top-nav-item" id="sejarahKulinerNav">Sejarah Kuliner</a>
+            </div>
+            
+            <!--burger menu -->
+            <div class="burger-menu" id="burgerMenu">
+                <i class="fas fa-bars" id="burgerIcon"></i>
+                <i class="fas fa-times" id="closeIcon" style="display: none;"></i>
+            </div>
+        </nav>
+    </div>
+
     <div id="main-content">
-        <div class="top-left-search">
-            <input type="text" id="food-search" placeholder="Cari Makanan...">
+        <section id="tentang-rasa" class="search-section">
+            <div class="search-container">
+                <h2 class="section-title">Temukan Rasa Favoritmu</h2>
+                <p class="section-description">Cari makanan khas Manado dan temukan cita rasa yang kamu inginkan</p>
+                <div class="search-input-container">
+                    <input type="text" id="food-search" placeholder="Ketik nama makanan..." autocomplete="off">
+                    <div id="search-suggestions" class="search-suggestions"></div>
+                </div>
+            </div>
+        </section>
+
+        <!--sistem filter -->
+        <div class="compact-filter-container">
+            <button id="filter-toggle" class="filter-toggle-btn">
+                <i class="fas fa-filter filter-icon"></i>
+                <span id="active-filter-indicator">Semua</span>
+                <i class="fas fa-chevron-down arrow-icon"></i>
+            </button>
+            
+            <div id="filter-dropdown" class="filter-dropdown">
+                <!--slider buat rating bntuk bintang-->
+                <div class="filter-section">
+                    <div class="filter-star-control">
+                        <div id="star-display" class="star-display">
+                            <span class="star-text">Tampilkan semua makanan</span>
+                        </div>
+                        <div class="star-slider-container">
+                            <input type="range" id="star-slider" min="0" max="5" value="0" class="star-slider">
+                            <input type="number" id="star-input" min="0" max="5" value="0" class="star-input" placeholder="0">
+                        </div>
+                    </div>
+                </div>
+                
+                <!--button filter -->
+                <div class="filter-section">
+                    <div class="mini-buttons">
+                        <button class="mini-btn" data-filter="all">Semua</button>
+                        <button class="mini-btn" data-filter="with-comments">Ada Komentar</button>
+                        <button class="mini-btn" data-filter="no-rating">Belum Dinilai</button>
+                        <button class="mini-btn" data-filter="reset">Reset</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="taste-filters">
-            <button data-taste="gurih">Gurih</button>
-            <button data-taste="pedas">Pedas</button>
-            <button data-taste="manis">Manis</button>
+        <div class="carousel-container">
+            <div class="carousel-nav-btn carousel-prev" id="carouselPrev">‹</div>
+            <div class="carousel-nav-btn carousel-next" id="carouselNext">›</div>
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="carousel-slide" data-food="tinutuan">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/tinutuan.jpg" alt="Tinutuan Bubur Manado">
+                            </div>
+                            <h3 class="carousel-title">Tinutuan / Bubur Manado</h3>
+                            <div class="star-rating" data-food-id="tinutuan">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="dabu-dabu">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/sambal dabu dabu.jpg" alt="Dabu-Dabu">
+                            </div>
+                            <h3 class="carousel-title">Dabu-Dabu</h3>
+                            <div class="star-rating" data-food-id="dabu-dabu">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="kanari">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/kanari.jpg" alt="Kue Kanari">
+                            </div>
+                            <h3 class="carousel-title">Kue Kanari</h3>
+                            <div class="star-rating" data-food-id="kanari">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="cakalang">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/cakalangfufu.jpg" alt="Cakalang Fufu">
+                            </div>
+                            <h3 class="carousel-title">Cakalang Fufu</h3>
+                            <div class="star-rating" data-food-id="cakalang">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="panada">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/panada.jpg" alt="Panada">
+                            </div>
+                            <h3 class="carousel-title">Panada</h3>
+                            <div class="star-rating" data-food-id="panada">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="klappertaart">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/Klappertaart.jpg" alt="Klappertaart">
+                            </div>
+                            <h3 class="carousel-title">Klappertaart</h3>
+                            <div class="star-rating" data-food-id="klappertaart">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="brenebon">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/brenebon.jpeg" alt="Sup Brenebon">
+                            </div>
+                            <h3 class="carousel-title">Sup Brenebon</h3>
+                            <div class="star-rating" data-food-id="brenebon">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="ikantude">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/ikantude.jpg" alt="Ikan Tude Bakar">
+                            </div>
+                            <h3 class="carousel-title">Ikan Tude Bakar</h3>
+                            <div class="star-rating" data-food-id="ikantude">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="sambalroa">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/sambalroa.jpg" alt="Sambal Roa">
+                            </div>
+                            <h3 class="carousel-title">Sambal Roa</h3>
+                            <div class="star-rating" data-food-id="sambalroa">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="ayamwoku">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/ayamwoku.jpg" alt="Ayam Woku">
+                            </div>
+                            <h3 class="carousel-title">Ayam Woku</h3>
+                            <div class="star-rating" data-food-id="ayamwoku">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="ayamricarica">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/ayamricarica.jpg" alt="Ayam Rica-Rica">
+                            </div>
+                            <h3 class="carousel-title">Ayam Rica-Rica</h3>
+                            <div class="star-rating" data-food-id="ayamricarica">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="ayamtinoransak">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/ayamtinoransak.jpg" alt="Ayam Tinoransak">
+                            </div>
+                            <h3 class="carousel-title">Ayam Tinoransak</h3>
+                            <div class="star-rating" data-food-id="ayamtinoransak">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="ragey">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/ragey.jpg" alt="Ragey">
+                            </div>
+                            <h3 class="carousel-title">Ragey</h3>
+                            <div class="star-rating" data-food-id="ragey">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="paniki">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/paniki.jpg" alt="Paniki">
+                            </div>
+                            <h3 class="carousel-title">Paniki</h3>
+                            <div class="star-rating" data-food-id="paniki">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="rahangtuna">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/rahangtuna.jpg" alt="Rahang Tuna Bakar">
+                            </div>
+                            <h3 class="carousel-title">Rahang Tuna Bakar</h3>
+                            <div class="star-rating" data-food-id="rahangtuna">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="rintewuuk">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/rintewuuk.jpg" alt="Rintek Wuuk">
+                            </div>
+                            <h3 class="carousel-title">Rintek Wuuk</h3>
+                            <div class="star-rating" data-food-id="rintewuuk">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="lalampa">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/lalampa.jpg" alt="Lalampa">
+                            </div>
+                            <h3 class="carousel-title">Lalampa</h3>
+                            <div class="star-rating" data-food-id="lalampa">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="nasijaha">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/nasijaha.jpg" alt="Nasi Jaha">
+                            </div>
+                            <h3 class="carousel-title">Nasi Jaha</h3>
+                            <div class="star-rating" data-food-id="nasijaha">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="kuelampu">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/kuelampu.jpg" alt="Kue Lampu-Lampu">
+                            </div>
+                            <h3 class="carousel-title">Kue Lampu-Lampu</h3>
+                            <div class="star-rating" data-food-id="kuelampu">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide" data-food="kacanggoyang">
+                        <div class="carousel-card">
+                            <div class="carousel-image">
+                                <img src="assets/kacanggoyang.jpg" alt="Kacang Goyang">
+                            </div>
+                            <h3 class="carousel-title">Kacang Goyang</h3>
+                            <div class="star-rating" data-food-id="kacanggoyang">
+                                <span class="star" data-rating="1">⭐</span>
+                                <span class="star" data-rating="2">⭐</span>
+                                <span class="star" data-rating="3">⭐</span>
+                                <span class="star" data-rating="4">⭐</span>
+                                <span class="star" data-rating="5">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="cards-container">
-            <div class="card chef tinutuan-new" data-tastes="gurih" data-image-type="tinutuan">
-                <div class="card-image-container" data-image-type="tinutuan"><img src="assets/tinutuan.jpg" alt="Tinutuan Bubur Manado"></div>
-                <h2 class="card-title">Tinutuan / Bubur Manado</h2>
-                <p class="card-description">Tinutuan adalah bubur khas Manado dengan banyak sayuran, sehat dan bergizi.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card dabu-dabu-new" data-tastes="pedas,gurih" data-image-type="dabu-dabu">
-                <div class="card-image-container" data-image-type="dabu-dabu"><img src="assets/sambal dabu dabu.jpg" alt="Sambal Dabu-Dabu"></div>
-                <h2 class="card-title">Dabu-Dabu</h2>
-                <p class="card-description">Sambal segar khas Manado yang dibuat dari irisan cabai, bawang, dan tomat.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card kanari-new" data-tastes="manis,gurih" data-image-type="kanari">
-                <div class="card-image-container" data-image-type="kanari"><img src="assets/kanari.jpg" alt="Kanari Manado Image"></div>
-                <h2 class="card-title">Kue Kanari</h2>
-                <p class="card-description">Kue kering khas Manado yang terbuat dari sagu dan kacang kenari.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card chef" data-tastes="gurih" data-image-type="cakalang">
-                <div class="card-image-container" data-image-type="cakalang"><img src="assets/cakalangfufu.jpg" alt="Cakalang Fufu Image"></div>
-                <h2 class="card-title">Cakalang Fufu</h2>
-                <p class="card-description">Hidangan ikan cakalang yang dibumbui, dijepit, dan diasapi hingga kering.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card panada" data-tastes="pedas,gurih" data-image-type="panada">
-                <div class="card-image-container" data-image-type="panada"><img src="assets/panada.jpg" alt="Kue Panada"></div>
-                <h2 class="card-title">Panada</h2>
-                <p class="card-description">Roti goreng khas Manado yang diisi dengan ikan cakalang pedas.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card klappertaart-new" data-tastes="manis" data-image-type="klappertaart">
-                <div class="card-image-container" data-image-type="klappertaart"><img src="assets/klappertaart.jpg" alt="Klappertaart"></div>
-                <h2 class="card-title">Klappertaart</h2>
-                <p class="card-description">Kue manis dan lembut berbahan dasar kelapa muda, susu, dan telur.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card brenebon-new" data-tastes="gurih" data-image-type="brenebon">
-                <div class="card-image-container" data-image-type="brenebon"><img src="assets/brenebon.jpeg" alt="Sup Brenebon"></div>
-                <h2 class="card-title">Sup Brenebon</h2>
-                <p class="card-description">Sup kacang merah khas Manado yang gurih dan menghangatkan.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card ikantude-new" data-tastes="pedas,gurih" data-image-type="ikantude">
-                <div class="card-image-container" data-image-type="ikantude"><img src="assets/ikantude.jpg" alt="Ikan Tude Bakar"></div>
-                <h2 class="card-title">Ikan Tude Bakar</h2>
-                <p class="card-description">Ikan kembung (tude) bakar disajikan dengan sambal dabu-dabu.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card sambalroa-new" data-tastes="pedas,gurih" data-image-type="sambalroa">
-                <div class="card-image-container" data-image-type="sambalroa"><img src="assets/sambalroa.jpg" alt="Sambal Roa"></div>
-                <h2 class="card-title">Sambal Roa</h2>
-                <p class="card-description">Sambal khas dari ikan roa asap yang dihaluskan, pedas dan gurih.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card ayamwoku-new" data-tastes="pedas,gurih" data-image-type="ayamwoku">
-                <div class="card-image-container" data-image-type="ayamwoku"><img src="assets/ayamwoku.jpg" alt="Ayam Woku"></div>
-                <h2 class="card-title">Ayam Woku</h2>
-                <p class="card-description">Ayam dengan bumbu rempah melimpah, pedas, dan sangat aromatik.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card ayamricarica-new" data-tastes="pedas,gurih" data-image-type="ayamricarica">
-                <div class="card-image-container" data-image-type="ayamricarica"><img src="assets/ayamricarica.jpg" alt="Ayam Rica-Rica"></div>
-                <h2 class="card-title">Ayam Rica-Rica</h2>
-                <p class="card-description">Hidangan ayam super pedas di mana 'rica' berarti 'cabai'.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card ayamtinoransak-new" data-tastes="pedas,gurih" data-image-type="ayamtinoransak">
-                <div class="card-image-container" data-image-type="ayamtinoransak"><img src="assets/ayamtinoransak.jpg" alt="Ayam Tinoransak"></div>
-                <h2 class="card-title">Ayam Tinoransak</h2>
-                <p class="card-description">Ayam yang dimasak dalam bambu dengan bumbu rempah pedas.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card ragey-new" data-tastes="pedas,gurih" data-image-type="ragey">
-                <div class="card-image-container" data-image-type="ragey"><img src="assets/ragey.jpg" alt="Ragey"></div>
-                <h2 class="card-title">Ragey</h2>
-                <p class="card-description">Sate babi khas Manado berukuran besar dengan bumbu pedas.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card paniki-new" data-tastes="pedas,gurih" data-image-type="paniki">
-                <div class="card-image-container" data-image-type="paniki"><img src="assets/paniki.jpg" alt="Paniki"></div>
-                <h2 class="card-title">Paniki</h2>
-                <p class="card-description">Hidangan ekstrem dari kelelawar dengan bumbu santan pedas.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card rahangtuna-new" data-tastes="gurih,pedas" data-image-type="rahangtuna">
-                <div class="card-image-container" data-image-type="rahangtuna"><img src="assets/rahangtuna.jpg" alt="Rahang Tuna Bakar"></div>
-                <h2 class="card-title">Rahang Tuna Bakar</h2>
-                <p class="card-description">Bagian kepala ikan tuna yang dibakar, tebal dan juicy.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card rintewuuk-new" data-tastes="gurih,pedas" data-image-type="rintewuuk">
-                <div class="card-image-container" data-image-type="rintewuuk"><img src="assets/rintewuuk.jpg" alt="Rintek Wuuk"></div>
-                <h2 class="card-title">Rintek Wuuk</h2>
-                <p class="card-description">Hidangan ekstrem dari semut rangrang dan larvanya.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card lalampa-new" data-tastes="gurih,pedas" data-image-type="lalampa">
-                <div class="card-image-container" data-image-type="lalampa"><img src="assets/lalampa.jpg" alt="Lalampa"></div>
-                <h2 class="card-title">Lalampa</h2>
-                <p class="card-description">Kudapan gurih dari beras ketan diisi ikan cakalang, dibungkus daun pisang lalu dibakar.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card nasijaha-new" data-tastes="gurih" data-image-type="nasijaha">
-                <div class="card-image-container" data-image-type="nasijaha"><img src="assets/nasijaha.jpg" alt="Nasi Jaha"></div>
-                <h2 class="card-title">Nasi Jaha</h2>
-                <p class="card-description">Beras ketan dan santan yang dimasak dalam bambu berlapis daun pisang.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card kuelampu-new" data-tastes="manis,gurih" data-image-type="kuelampu">
-                <div class="card-image-container" data-image-type="kuelampu"><img src="assets/kuelampu.jpg" alt="Kue Lampu-Lampu"></div>
-                <h2 class="card-title">Kue Lampu-Lampu</h2>
-                <p class="card-description">Kue basah lembut dari santan dan tepung beras dengan wadah daun pandan.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-            <div class="card kacanggoyang-new" data-tastes="manis,gurih" data-image-type="kacanggoyang">
-                <div class="card-image-container" data-image-type="kacanggoyang"><img src="assets/kacanggoyang.jpg" alt="Kacang Goyang"></div>
-                <h2 class="card-title">Kacang Goyang</h2>
-                <p class="card-description">Kacang tanah renyah bersalut gula manis berwarna-warni khas Kotamobagu.</p>
-                <button class="toggle-comments-btn">Opini Pengguna</button>
-                <div class="comments-section hidden">
-                    <ul class="comments-list"></ul>
-                    <form class="comment-form"><input type="text" placeholder="Tambahkan opini Anda..." class="comment-input" required><button type="submit">Kirim</button></form>
-                </div>
-            </div>
-        </div> 
+    <!-- History Page (Initially Hidden) -->
+    <div id="history-page" class="page-container" style="display: none;">
+        <div class="history-header">
+            <button id="back-to-main" class="back-button">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </button>
+            <h1 class="history-title">Sejarah Kuliner Manado</h1>
+            <p class="history-subtitle">Jelajahi sejarah di balik setiap hidangan khas Manado</p>
+        </div>
+        <div id="history-content" class="history-content">
+            <!-- History items will be populated by JavaScript -->
+        </div>
     </div>
 
     <div id="food-modal" class="modal-container">
@@ -250,10 +438,32 @@
                 <div class="modal-image-side"><img id="modal-image" src="" alt="Gambar Makanan Detail"></div>
                 <div class="modal-text-side">
                     <h2 id="modal-title"></h2>
+                    <div class="modal-star-rating">
+                        <h3>Beri Rating</h3>
+                        <div class="star-rating modal-stars" id="modalStarRating">
+                            <span class="star" data-rating="1">⭐</span>
+                            <span class="star" data-rating="2">⭐</span>
+                            <span class="star" data-rating="3">⭐</span>
+                            <span class="star" data-rating="4">⭐</span>
+                            <span class="star" data-rating="5">⭐</span>
+                        </div>
+                    </div>
                     <h3>Deskripsi</h3>
                     <p id="modal-description"></p>
                     <h3>Sejarah</h3>
                     <p id="modal-history"></p>
+                    
+                    <div class="modal-comments-section">
+                        <h3>Komentar Pengguna</h3>
+                        <div class="modal-comment-form">
+                            <input type="text" id="modal-comment-user" placeholder="Nama kamu (opsional)" class="comment-user-input">
+                            <textarea id="modal-comment-text" placeholder="Bagikan pengalamanmu tentang makanan ini..." class="comment-text-input"></textarea>
+                            <button id="modal-comment-submit" class="comment-submit-btn">Kirim Komentar</button>
+                        </div>
+                        <div id="modal-comments-list" class="modal-comments-list">
+                            <!-- Comments will be populated here -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
