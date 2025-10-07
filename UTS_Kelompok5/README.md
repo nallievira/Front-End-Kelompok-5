@@ -191,12 +191,11 @@ _Screenshot halaman utama Rasa Sejarah Manado beserta tombol Music_
 ![](./dokumentasi_ss/Tablet_TentangRasaPage.png)
 _____________________________________________________________________
 _Screenshot halaman "Tentang Rasa" (Carousel yang slideable)_
--------------------------------------------------------------------
+---
 
 ![](./dokumentasi_ss/Tablet_SejarahPage.png)
 _____________________________________________________________________
 _Screenshot halaman "Sejarah" menampilkan sejarah setiap makanan khas Manado_
--------------------------------------------------------------------
 
 ---
 
