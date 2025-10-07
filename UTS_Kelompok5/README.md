@@ -77,94 +77,116 @@ Website ini dikembangkan oleh **Kelompok 5** dengan kontributor:
 
 ![Preview Website (Desktop)](./dokumentasi_ss/Homepage.png)
 _Screenshot halaman utama Rasa Sejarah Manado beserta tombol Music_
--------------------------------------------------------------------
+
+---
 
 ![](./dokumentasi_ss/Homepage_hover_navbar.png)
 _Screenshot Homepage Top Navigation Bar Hover_
 
+---
 
 ![](./dokumentasi_ss/Page_Sejarah_MakananManado.png)
 _Screenshot Page "Sejarah" menampilkan sejarah setiap makanan khas Manado_
 
+---
 
 ![](./dokumentasi_ss/TentangRasa_Page_SlideableCarousel.png)
 _Screenshot Page "Tentang Rasa" (Carousel yang slideable)_
 
+---
 
 ![](./dokumentasi_ss/Search_bar.png)
 _Screenshot Page "Tentang Rasa" bagian Search Bar_
 
+---
 
 ![](./dokumentasi_ss/Filter_Bintang.png)
 _Screenshot Filter Rating_
 
+---
 
 ![](./dokumentasi_ss/Beri_Rating.png)
 _Screenshot user memberikan rating bintang 4_
 
+---
 
 ![](./dokumentasi_ss/Detail_Popup.png)
 _Screenshot Page "Tentang Rasa" bagian Modal Popup Detail Makanan_
 
+---
 
 ![](./dokumentasi_ss/Comment_andHover.png)
 _Screenshot Section Comment pada Detail Popup Makanan_
 
+---
 
 ![](./dokumentasi_ss/Edit_save_comment.png)
 _Screenshot Section Comment ketika komentar diubah dan kemudian disimpan_
 
+---
 
 ![](./dokumentasi_ss/Comment_Berhasildiubah.png)
 _Screenshot Section Comment, komentar berhasil diubah_
 
+---
 
 ![](./dokumentasi_ss/Delete_Comment_Alert.png)
 _Screenshot Section Comment bagian alert ketika komentar dihapus_
 
+---
 
 ![](./dokumentasi_ss/Comment_berhasil_delete.png)
 _Screenshot Section Comment, komentar berhasil dihapus_
 
+---
 
 ![Preview Website (Mobile Responsive)](./dokumentasi_ss/MobileResp_Homepage.png)
 _Screenshot halaman utama Rasa Sejarah Manado beserta tombol Music_
 
+---
 
 ![](./dokumentasi_ss/MobileResp_BurgerMenu.png)
 _Screenshot Homepage Burger Menu_
 
+---
 
 ![](./dokumentasi_ss/MobileResp_tentangRasa.png)
 _Screenshot Page "Tentang Rasa" (Carousel yang slideable)_
 
+---
 
 ![](./dokumentasi_ss/MobileResp_SejarahPage.png)
 _Screenshot Page "Sejarah" menampilkan sejarah setiap makanan khas Manado_
 
+---
 
 ![](./dokumentasi_ss/MobileResp_Search.png)
 _Screenshot bagian Search Bar_
 
+---
 
 ![](./dokumentasi_ss/MobileResp_DetailMakanan.png)
 _Screenshot bagian Modal Popup Detail Makanan_
 
+---
 
 ![](./dokumentasi_ss/MobileResp_CommentSection.png)
 _Screenshot bagian Modal Popup Comment Section_
 
+---
 
 ![Preview Website (Tablet Mode)](./dokumentasi_ss/Tablet_homepage.png)
 _Screenshot halaman utama Rasa Sejarah Manado beserta tombol Music_
 
+---
 
 ![](./dokumentasi_ss/Tablet_TentangRasaPage.png)
 _Screenshot halaman "Tentang Rasa" (Carousel yang slideable)_
-
+-------------------------------------------------------------------
 
 ![](./dokumentasi_ss/Tablet_SejarahPage.png)
 _Screenshot halaman "Sejarah" menampilkan sejarah setiap makanan khas Manado_
+-------------------------------------------------------------------
 
 ---
 
