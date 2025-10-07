@@ -78,10 +78,10 @@ Website ini dikembangkan oleh **Kelompok 5** dengan kontributor:
 ![Preview Website](./dokumentasi_ss/Homepage.png)
 _Screenshot halaman utama Rasa Sejarah Manado_
 
-![Homepage Top Navigation Bar Hover](./dokumentasi_ss/Homepage_hover_navbar.png)
+(./dokumentasi*ss/Homepage_hover_navbar.png)
 _Screenshot Homepage Top Navigation Bar Hover_
----
 
+---
 
 ## Detail Fitur & Kontributor
 
