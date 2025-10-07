@@ -77,7 +77,7 @@ Website ini dikembangkan oleh **Kelompok 5** dengan kontributor:
 
 ![Preview Website (Desktop)](./dokumentasi_ss/Homepage.png)
 _Screenshot halaman utama Rasa Sejarah Manado beserta tombol Music_
-
+-------------------------------------------------------------------
 
 ![](./dokumentasi_ss/Homepage_hover_navbar.png)
 _Screenshot Homepage Top Navigation Bar Hover_
