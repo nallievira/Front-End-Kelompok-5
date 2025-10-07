@@ -1458,7 +1458,6 @@ function updateMusicUI() {
         musicToggle.classList.add('muted');
     }
 }
-
 function initializeMusicUI() {
     updateMusicUI();
 }
