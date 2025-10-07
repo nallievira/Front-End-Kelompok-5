@@ -3,24 +3,83 @@ const foodData = { tinutuan: { title: "Tinutuan / Bubur Manado", description: "T
 
 //var global
 let allComments;
-let userVotes;
 let userRatings = {};
 let activeFilter = 'all';
 const COMMENT_KEY = 'kulinerManadoComments';
-const VOTE_KEY = 'kulinerManadoUserVotes';
 const RATING_KEY = 'kulinerManadoRatings';
 
-const defaultComments = { tinutuan: [{ user: "Admin", text: "Sangat sehat dan lezat!", timestamp: new Date(), likes: 10, dislikes: 0 }], 'dabu-dabu': [{ user: "Admin", text: "Pedasnya nampol! Segar banget.", timestamp: new Date(), likes: 15, dislikes: 1 }], kanari: [], cakalang: [], panada: [], klappertaart: [], brenebon: [], ikantude: [], sambalroa: [], ayamwoku: [], ayamricarica: [], ayamtinoransak: [], ragey: [], paniki: [], rahangtuna: [], rintewuuk: [], lalampa: [], nasijaha: [], kuelampu: [], kacanggoyang: [] };
+
+let audioPlayer = null;
+let nextAudioPlayer = null; //loading ke lagu selanjutnya
+let currentSongIndex = 0;
+let isMusicPlaying = false;
+let isMusicMuted = true;
+let isTransitioning = false;
+let playlistLoop = true; 
+const musicTracks = [
+    'assets/music/O Ina Ni Keke.mp3',
+    'assets/music/videoplayback.mp3'
+];
+const songNames = [
+    'O Ina Ni Keke',
+    'Traditional Manado Song'
+];
+
+const defaultComments = { 
+    tinutuan: [{ 
+        id: 'admin-comment-1', 
+        user: "Admin", 
+        text: "Sangat sehat dan lezat!", 
+        timestamp: new Date().toISOString() 
+    }], 
+    'dabu-dabu': [{ 
+        id: 'admin-comment-2', 
+        user: "Admin", 
+        text: "Pedasnya nampol! Segar banget.", 
+        timestamp: new Date().toISOString() 
+    }], 
+    kanari: [], cakalang: [], panada: [], klappertaart: [], brenebon: [], ikantude: [], sambalroa: [], ayamwoku: [], ayamricarica: [], ayamtinoransak: [], ragey: [], paniki: [], rahangtuna: [], rintewuuk: [], lalampa: [], nasijaha: [], kuelampu: [], kacanggoyang: [] 
+};
 
 //fungsi modaltest buat debug
 window.testModal = function(foodId) {
     openModal(foodId || 'tinutuan');
 };
 
+// Test function to check if everything is working
+window.testFunctions = function() {
+    console.log('=== Function Test Results ===');
+    console.log('setupScrollAnimation exists:', typeof setupScrollAnimation === 'function');
+    console.log('setupEventListeners exists:', typeof setupEventListeners === 'function');
+    console.log('setupCardEntryAnimation exists:', typeof setupCardEntryAnimation === 'function');
+    console.log('setupCarousel exists:', typeof setupCarousel === 'function');
+    console.log('openModal exists:', typeof openModal === 'function');
+    console.log('DOM loaded:', document.readyState);
+    console.log('=== End Test Results ===');
+};
+
+// Debug function to check modal comment buttons
+window.checkModalButtons = function() {
+    console.log('=== Modal Button Check ===');
+    const modal = document.getElementById('food-modal');
+    console.log('Modal visible:', modal?.classList.contains('is-visible'));
+    
+    const editBtns = document.querySelectorAll('.edit-comment-btn');
+    const deleteBtns = document.querySelectorAll('.delete-comment-btn');
+    console.log('Edit buttons found:', editBtns.length);
+    console.log('Delete buttons found:', deleteBtns.length);
+    
+    deleteBtns.forEach((btn, i) => {
+        console.log(`Delete button ${i}:`, btn);
+        console.log(`Delete button ${i} visible:`, btn.offsetWidth > 0 && btn.offsetHeight > 0);
+        console.log(`Delete button ${i} styles:`, window.getComputedStyle(btn));
+    });
+    console.log('=== End Modal Button Check ===');
+};
+
 //load halaman HTML
 document.addEventListener('DOMContentLoaded', function() {
     loadComments();
-    loadVotes();
     loadRatings();
     setupScrollAnimation();
     setupEventListeners();
@@ -33,19 +92,31 @@ document.addEventListener('DOMContentLoaded', function() {
     setupSearchSuggestions();
     setupModalComments();
     setupPageRouting();
+    setupMusicSystem(); // Add music system
 });
 
 //buat load komentar
 function loadComments() {
     const stored = localStorage.getItem(COMMENT_KEY);
     allComments = stored ? JSON.parse(stored) : defaultComments;
-    Object.keys(allComments).forEach(id => {
-        allComments[id].forEach(c => {
-            if (c.likes === undefined) c.likes = 0;
-            if (c.dislikes === undefined) c.dislikes = 0;
-        });
-    });
+    
+    // Ensure all comments have unique IDs
+    ensureCommentIds();
     saveComments();
+}
+
+
+// Ensure all comments have unique IDs
+function ensureCommentIds() {
+    Object.keys(allComments).forEach(foodId => {
+        if (allComments[foodId] && Array.isArray(allComments[foodId])) {
+            allComments[foodId].forEach(comment => {
+                if (!comment.id) {
+                    comment.id = 'comment-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+                }
+            });
+        }
+    });
 }
 
 //buat simpan komentar
@@ -53,16 +124,40 @@ function saveComments() {
     localStorage.setItem(COMMENT_KEY, JSON.stringify(allComments));
 }
 
-//buat load vote
-function loadVotes() {
-    const stored = localStorage.getItem(VOTE_KEY);
-    userVotes = stored ? JSON.parse(stored) : {};
+// Edit comment functionality
+function editComment(foodId, commentId, newText) {
+    if (!allComments[foodId]) return false;
+    
+    const commentIndex = allComments[foodId].findIndex(comment => comment.id === commentId);
+    if (commentIndex !== -1) {
+        allComments[foodId][commentIndex].text = newText;
+        allComments[foodId][commentIndex].edited = true;
+        allComments[foodId][commentIndex].editedTimestamp = Date.now();
+        saveComments();
+        return true;
+    }
+    return false;
 }
 
-//buat simpan vote
-function saveVotes() {
-    localStorage.setItem(VOTE_KEY, JSON.stringify(userVotes));
+// Delete comment functionality
+function deleteComment(foodId, commentId) {
+    if (!allComments[foodId]) {
+        console.error('No comments found for foodId:', foodId);
+        return false;
+    }
+    
+    const commentIndex = allComments[foodId].findIndex(comment => comment.id === commentId);
+    
+    if (commentIndex !== -1) {
+        allComments[foodId].splice(commentIndex, 1);
+        saveComments();
+        return true;
+    }
+    
+    console.error('Comment not found with ID:', commentId, 'Available IDs:', allComments[foodId].map(c => c.id));
+    return false;
 }
+
 
 //buat load rating
 function loadRatings() {
@@ -144,9 +239,7 @@ function setupCommentSystem() {
                 const newComment = {
                     user: "Anonymous User",
                     text: input.value.trim(),
-                    timestamp: new Date().toISOString(),
-                    likes: 0,
-                    dislikes: 0
+                    timestamp: new Date().toISOString()
                 };
                 if (!allComments[foodId]) allComments[foodId] = [];
                 allComments[foodId].push(newComment);
@@ -164,34 +257,6 @@ function setupCommentSystem() {
     });
 }
 
-// Vote handling
-function handleVote(foodId, timestamp, action) {
-    const comment = allComments[foodId]?.find(c => c.timestamp === timestamp);
-    if (!comment) return;
-
-    const previousVote = userVotes[timestamp];
-
-    if (previousVote === action) {
-        if (action === 'like') comment.likes--;
-        else comment.dislikes--;
-        delete userVotes[timestamp];
-    } else if (previousVote) {
-        if (previousVote === 'like') comment.likes--;
-        else comment.dislikes--;
-        
-        if (action === 'like') comment.likes++;
-        else comment.dislikes++;
-        userVotes[timestamp] = action;
-    } else {
-        if (action === 'like') comment.likes++;
-        else comment.dislikes++;
-        userVotes[timestamp] = action;
-    }
-
-    saveComments();
-    saveVotes();
-    renderComments(foodId);
-}
 
 // fungsi filter
 function filterCarousel() {
@@ -373,6 +438,17 @@ function setupScrollAnimation() {
             $('.top-left-search').fadeIn(300);
         } else {
             $('.top-left-search').fadeOut(200);
+        }
+        
+        // Hide music controls when scrolling past intro section
+        const musicControls = document.getElementById('music-controls');
+        if (musicControls) {
+            const introHeight = window.innerHeight; // Intro section is roughly viewport height
+            if (scrollY > introHeight * 0.8) { // Hide when 80% scrolled past intro
+                musicControls.classList.add('hidden');
+            } else {
+                musicControls.classList.remove('hidden');
+            }
         }
     });
 }
@@ -819,11 +895,10 @@ function handleModalCommentSubmit() {
     }
     
     const newComment = {
+        id: Date.now().toString(), //ID unik untuk operasi CRUD untuk komentar
         user: userName,
         text: commentText,
-        timestamp: new Date().toISOString(),
-        likes: 0,
-        dislikes: 0
+        timestamp: new Date().toISOString()
     };
     
     if (!allComments[foodId]) {
@@ -866,8 +941,14 @@ function renderModalComments(foodId) {
             minute: '2-digit'
         });
         
+        // memastikan setiap komentar memiliki ID
+        if (!comment.id) {
+            console.warn('Comment without ID found:', comment);
+            comment.id = 'fallback-' + Date.now().toString() + Math.random().toString(36).substr(2, 9);
+        }
+        
         return `
-            <div class="modal-comment-item">
+            <div class="modal-comment-item" data-comment-id="${comment.id}">
                 <div class="modal-comment-header">
                     <span class="modal-comment-user">
                         <i class="fas fa-user-circle" style="margin-right: 5px;"></i>
@@ -875,15 +956,125 @@ function renderModalComments(foodId) {
                     </span>
                     <span class="modal-comment-date">${date}</span>
                 </div>
-                <div class="modal-comment-text">${comment.text}</div>
+                <div class="modal-comment-text" data-original-text="${comment.text}">${comment.text}</div>
+                <div class="comment-actions-bottom">
+                    <button class="edit-comment-btn" title="Edit Comment">
+                        Edit
+                    </button>
+                    <button class="delete-comment-btn" title="Delete Comment">
+                        Delete
+                    </button>
+                </div>
             </div>
         `;
     }).join('');
     
     commentsList.innerHTML = html;
+    
+    // menambahkan event listeners untuk tombol edit dan delete komentar
+    setupCommentActions(foodId);
 }
 
-// Page Routing System
+//event listeners untuk tombol edit dan delete komentar
+function setupCommentActions(foodId) {
+    const commentsList = document.getElementById('modal-comments-list');
+    if (!commentsList) return;
+    
+    //button edit komentar
+    commentsList.querySelectorAll('.edit-comment-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const commentItem = btn.closest('.modal-comment-item');
+            const commentId = commentItem.getAttribute('data-comment-id');
+            startEditComment(foodId, commentId, commentItem);
+        });
+    });
+    
+    //tombol delete komentar
+    commentsList.querySelectorAll('.delete-comment-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const commentItem = btn.closest('.modal-comment-item');
+            const commentId = commentItem.getAttribute('data-comment-id');
+            confirmDeleteComment(foodId, commentId);
+        });
+    });
+}
+
+//pengeditan komentar
+function startEditComment(foodId, commentId, commentItem) {
+    const textDiv = commentItem.querySelector('.modal-comment-text');
+    const originalText = textDiv.getAttribute('data-original-text');
+    
+    //buat interface edit komentar
+    textDiv.innerHTML = `
+        <div class="edit-comment-form">
+            <textarea class="edit-comment-textarea" maxlength="500">${originalText}</textarea>
+            <div class="edit-comment-actions">
+                <button class="save-edit-btn" title="Save Changes">
+                    <i class="fas fa-check"></i> Save
+                </button>
+                <button class="cancel-edit-btn" title="Cancel Edit">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+            </div>
+        </div>
+    `;
+    
+    //hide action buttons selama edit
+    const actionButtons = commentItem.querySelector('.comment-actions-bottom');
+    if (actionButtons) {
+        actionButtons.style.display = 'none';
+    }
+    
+    //event listeners for save dan/atau cancel
+    const saveBtn = textDiv.querySelector('.save-edit-btn');
+    const cancelBtn = textDiv.querySelector('.cancel-edit-btn');
+    const textarea = textDiv.querySelector('.edit-comment-textarea');
+    
+    saveBtn.addEventListener('click', () => {
+        const newText = textarea.value.trim();
+        if (newText && newText !== originalText) {
+            if (editComment(foodId, commentId, newText)) {
+                renderModalComments(foodId);
+                showTemporaryMessage('Komentar berhasil diubah!', 'success');
+            }
+        } else if (!newText) {
+            alert('Komentar tidak boleh kosong!');
+        } else {
+            cancelEdit();
+        }
+    });
+    
+    cancelBtn.addEventListener('click', cancelEdit);
+    
+    function cancelEdit() {
+        textDiv.textContent = originalText;
+        if (actionButtons) {
+            actionButtons.style.display = 'flex';
+        }
+    }
+    
+    textarea.focus();
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+}
+
+//konfirmasi penghapusan komentar
+function confirmDeleteComment(foodId, commentId) {
+    if (confirm('Apakah Anda yakin ingin menghapus komentar ini? Aksi ini tidak dapat dibatalkan.')) {
+        if (deleteComment(foodId, commentId)) {
+            renderModalComments(foodId);
+            applyFilters(); //update hitung komentar setelah penghapusan
+            showTemporaryMessage('Komentar berhasil dihapus', 'success');
+        } else {
+            showTemporaryMessage('Gagal menghapus komentar, coba lagi.', 'error');
+        }
+    }
+}
+
+//navigasi routing dari Sejarah ke Main dan sebaliknya
 function setupPageRouting() {
     const historyNav = document.getElementById('sejarahKulinerNav');
     const backBtn = document.getElementById('back-to-main');
@@ -1069,3 +1260,205 @@ animationStyles.textContent = `
     }
 `;
 document.head.appendChild(animationStyles);
+
+function setupMusicSystem() {
+    createAudioPlayers();
+    
+    const musicToggle = document.getElementById('music-toggle');
+    const musicIcon = document.getElementById('music-icon');
+    
+    if (!audioPlayer || !musicToggle) return;
+
+    initializePlaylist();
+    
+    musicToggle.addEventListener('click', function() {
+        if (isMusicMuted) {
+            startPlaylist();
+        } else {
+            stopPlaylist();
+        }
+    });
+    
+    console.log('Seamless playlist system initialized');
+}
+
+function createAudioPlayers() {
+    
+    audioPlayer = document.getElementById('audio-player');
+    if (!audioPlayer) {
+        audioPlayer = document.createElement('audio');
+        audioPlayer.id = 'audio-player';
+        audioPlayer.preload = 'auto';
+        document.body.appendChild(audioPlayer);
+    }
+    
+    nextAudioPlayer = document.createElement('audio');
+    nextAudioPlayer.id = 'next-audio-player';
+    nextAudioPlayer.preload = 'auto';
+    document.body.appendChild(nextAudioPlayer);
+    
+    audioPlayer.volume = 0.35;
+    nextAudioPlayer.volume = 0.35;
+}
+
+function initializePlaylist() {
+    if (!audioPlayer || !nextAudioPlayer) return;
+    
+    //lagu pertama dimulai
+    audioPlayer.src = musicTracks[currentSongIndex];
+    audioPlayer.load();
+    
+    //sblm lanjut ke lagu kedua
+    preloadNextSong();
+    
+    setupSeamlessTransitions();
+}
+
+function preloadNextSong() {
+    const nextIndex = (currentSongIndex + 1) % musicTracks.length;
+    nextAudioPlayer.src = musicTracks[nextIndex];
+    nextAudioPlayer.load();
+}
+
+function setupSeamlessTransitions() {
+    audioPlayer.addEventListener('timeupdate', function() {
+        if (!isMusicPlaying || isMusicMuted || isTransitioning) return;
+        
+        const timeLeft = audioPlayer.duration - audioPlayer.currentTime;
+      
+        if (timeLeft <= 0.5 && timeLeft > 0.3) {
+            startSeamlessTransition();
+        }
+    });
+    
+    audioPlayer.addEventListener('ended', function() {
+        if (!isTransitioning) {
+            forceNextSong();
+        }
+    });
+    
+    nextAudioPlayer.addEventListener('timeupdate', function() {
+        if (!isMusicPlaying || isMusicMuted || isTransitioning) return;
+        
+        const timeLeft = nextAudioPlayer.duration - nextAudioPlayer.currentTime;
+        
+        if (timeLeft <= 0.5 && timeLeft > 0.3) {
+            startSeamlessTransition();
+        }
+    });
+    
+    nextAudioPlayer.addEventListener('ended', function() {
+        if (!isTransitioning) {
+            forceNextSong();
+        }
+    });
+    
+    audioPlayer.addEventListener('error', handleAudioError);
+    nextAudioPlayer.addEventListener('error', handleAudioError);
+}
+
+function startSeamlessTransition() {
+    if (isTransitioning) return;
+    
+    isTransitioning = true;
+    const currentPlayer = audioPlayer;
+    const nextPlayer = nextAudioPlayer;
+
+    nextPlayer.play().then(() => {
+        setTimeout(() => {
+            currentPlayer.pause();
+            
+            audioPlayer = nextPlayer;
+            nextAudioPlayer = currentPlayer;
+    
+            currentSongIndex = (currentSongIndex + 1) % musicTracks.length;
+            
+            preloadNextSong();
+            
+            isTransitioning = false;
+            
+            console.log(`Seamlessly transitioned to: ${songNames[currentSongIndex]}`);
+        }, 100);
+    }).catch(e => {
+        console.log('Transition failed:', e);
+        isTransitioning = false;
+        forceNextSong();
+    });
+}
+
+function forceNextSong() {
+    currentSongIndex = (currentSongIndex + 1) % musicTracks.length;
+    audioPlayer.src = musicTracks[currentSongIndex];
+    audioPlayer.load();
+    
+    if (!isMusicMuted && isMusicPlaying) {
+        audioPlayer.play().catch(e => console.log('Force play error:', e));
+    }
+    
+    preloadNextSong();
+    console.log(`Forced transition to: ${songNames[currentSongIndex]}`);
+}
+
+function startPlaylist() {
+    if (!audioPlayer) return;
+    
+    isMusicMuted = false;
+    isMusicPlaying = true;
+    
+    audioPlayer.play().then(() => {
+        updateMusicUI();
+        console.log('🎵 Playlist started - Seamless loop active');
+    }).catch(error => {
+        console.log('Playlist start prevented by browser:', error);
+        
+        const enablePlaylist = () => {
+            audioPlayer.play().then(() => {
+                updateMusicUI();
+                document.removeEventListener('click', enablePlaylist);
+                console.log('🎵 Playlist enabled via user interaction');
+            });
+        };
+        document.addEventListener('click', enablePlaylist);
+    });
+}
+
+function stopPlaylist() {
+    if (!audioPlayer) return;
+    
+    isMusicMuted = true;
+    isMusicPlaying = false;
+    
+    audioPlayer.pause();
+    if (nextAudioPlayer) nextAudioPlayer.pause();
+    
+    updateMusicUI();
+    console.log('Lagu berhenti');
+}
+
+function handleAudioError(e) {
+    console.error('Audio error:', e);
+    setTimeout(() => {
+        forceNextSong();
+    }, 500);
+}
+
+function updateMusicUI() {
+    const musicToggle = document.getElementById('music-toggle');
+    const musicIcon = document.getElementById('music-icon');
+    
+    if (!musicToggle || !musicIcon) return;
+    
+    if (isMusicPlaying && !isMusicMuted) {
+        musicIcon.className = 'fas fa-volume-up';
+        musicToggle.classList.remove('muted');
+        musicToggle.classList.add('playing');
+    } else {
+        musicIcon.className = 'fas fa-volume-mute';
+        musicToggle.classList.remove('playing');
+        musicToggle.classList.add('muted');
+    }
+}
+
+function initializeMusicUI() {
+    updateMusicUI();
+}

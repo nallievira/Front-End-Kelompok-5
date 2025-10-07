@@ -14,8 +14,22 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+    <!--tombol musik -->
+    <div id="music-controls" class="music-controls">
+        <button id="music-toggle" class="music-toggle-btn">
+            <i class="fas fa-volume-mute" id="music-icon"></i>
+        </button>
+    </div>
+    
+    <!--music dihide saat scroll -->
+    <audio id="audio-player" preload="auto" loop="false">
+        <source src="assets/music/O Ina Ni Keke.mp3" type="audio/mpeg">
+        <source src="assets/music/videoplayback.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
     
     <div id="screen-intro">
+        
         <div class="screen-text-center">
             <div class="screen-title-wrapper">
                 <h2 class="screen-title-rasa">Rasa</h2>
@@ -417,7 +431,7 @@
         </div>
     </div>
 
-    <!-- History Page (Initially Hidden) -->
+    <!--halaman khusus bgian Nav "Sejarah"-->
     <div id="history-page" class="page-container" style="display: none;">
         <div class="history-header">
             <button id="back-to-main" class="back-button">
@@ -427,7 +441,6 @@
             <p class="history-subtitle">Jelajahi sejarah di balik setiap hidangan khas Manado</p>
         </div>
         <div id="history-content" class="history-content">
-            <!-- History items will be populated by JavaScript -->
         </div>
     </div>
 
@@ -461,7 +474,6 @@
                             <button id="modal-comment-submit" class="comment-submit-btn">Kirim Komentar</button>
                         </div>
                         <div id="modal-comments-list" class="modal-comments-list">
-                            <!-- Comments will be populated here -->
                         </div>
                     </div>
                 </div>

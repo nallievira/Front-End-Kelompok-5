@@ -288,20 +288,18 @@ body {
 }
 
 .burger-menu {
-    display: flex !important;
+    display: none; 
     align-items: center;
     justify-content: center;
     cursor: pointer;
     padding: 0;
     z-index: 1001;
     position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(133, 179, 218, 0.8);
+    top: 70%;
+    transform: translateY(-10%);
     border-radius: 10px;
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     transition: all 0.3s ease;
 }
 
@@ -379,7 +377,7 @@ body {
         padding: 0 20px;
     }
     
-   
+    /* Show burger menu only on mobile */
     .burger-menu {
         display: flex !important;
         right: 15px;
@@ -744,45 +742,7 @@ body {
     position: relative;
 }
 
-.burger-menu {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    cursor: pointer;
-    width: 35px;
-    height: 35px;
-    margin-right: 20px;
-    z-index: 101;
-}
-.burger-menu span {
-    height: 4px;
-    width: 100%;
-    background: #02014f;
-    margin: 5px 0;
-    border-radius: 2px;
-    transition: 0.4s;
-    display: block;
-}
-
-@media (max-width: 768px) {
-    .burger-menu {
-        display: flex;
-    }
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background: rgba(2, 1, 79, 0.95);
-        padding: 20px 0;
-        z-index: 100;
-    }
-    .nav-links.active {
-        display: flex;
-    }
-}
+/* Removed duplicate burger menu styles - main styles are above */
 
 .card-image-container img {
     width: 100%;
@@ -1435,6 +1395,110 @@ body {
 }
 
 
+.comment-actions-bottom {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    justify-content: flex-end;
+}
+
+.edit-comment-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.edit-comment-btn:hover {
+    background: #0056b3;
+    transform: translateY(-1px);
+}
+
+.delete-comment-btn {
+    background: #dc3545 !important;
+    color: white !important;
+    border: none !important;
+    padding: 6px 12px !important;
+    border-radius: 4px !important;
+    font-size: 12px !important;
+    font-family: Arial, sans-serif !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    display: inline-block !important;
+    position: relative !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.delete-comment-btn:hover {
+    background: #c82333 !important;
+    transform: translateY(-1px) !important;
+}
+
+.edit-comment-form {
+    width: 100%;
+}
+
+.edit-comment-textarea {
+    width: 100%;
+    min-height: 60px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: 'Coolvetica', sans-serif;
+    font-size: 14px;
+    resize: vertical;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.edit-comment-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.save-edit-btn,
+.cancel-edit-btn {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'Coolvetica', sans-serif;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.save-edit-btn {
+    background: #28a745;
+    color: white;
+}
+
+.save-edit-btn:hover {
+    background: #218838;
+    transform: translateY(-1px);
+}
+
+.cancel-edit-btn {
+    background: #6c757d;
+    color: white;
+}
+
+.cancel-edit-btn:hover {
+    background: #545b62;
+    transform: translateY(-1px);
+}
+
+
 @media (max-width: 768px) {
     .section-title {
         font-size: 2rem;
@@ -1498,9 +1562,6 @@ body {
 @media (max-width: 768px) { .modal-grid { grid-template-columns: 1fr; } .modal-image-side { height: 200px; } .modal-text-side { padding: 20px 25px; } }
 
 
-.delete-comment-btn { position: absolute; top: 5px; right: 5px; width: 20px; height: 20px; border-radius: 50%; border: none; background-color: rgba(255, 0, 0, 0.6); color: white; font-size: 14px; font-weight: bold; line-height: 20px; text-align: center; cursor: pointer; opacity: 0; transition: opacity 0.2s ease, background-color 0.2s ease; }
-.comment-item:hover .delete-comment-btn { opacity: 1; }
-.delete-comment-btn:hover { background-color: rgba(255, 0, 0, 0.9); }
 
 #reset-filters {
     border-color: #f35d59;
@@ -1512,45 +1573,6 @@ body {
 }
 
 
-.comment-actions {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-top: 8px;
-}
-
-.vote-btn {
-    background-color: transparent;
-    border: none; 
-    cursor: pointer;
-    font-size: 16px;
-    padding: 2px 4px;
-    border-radius: 4px;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    color: white; 
-    opacity: 0.8;
-}
-
-.vote-btn:hover {
-    transform: scale(1.2);
-    opacity: 1;
-    background-color: rgba(0, 0, 0, 0.2); 
-}
-
-.vote-count {
-    font-size: 12px;
-    font-weight: bold;
-    min-width: 15px;
-    text-align: left;
-    margin-right: 10px;
-    opacity: 0.9;
-}
-
-.vote-btn.active {
-    background-color: rgba(0, 0, 0, 0.3);
-    transform: scale(1.1);
-    opacity: 1;
-}
 
 .compact-filter-container {
     position: relative;
@@ -1849,5 +1871,109 @@ body {
     .mini-btn {
         font-size: 11px;
         padding: 6px 10px;
+    }
+}
+
+
+.music-controls {
+    position: fixed; 
+    top: 20px;
+    left: 20px; 
+    z-index: 999;
+    font-family: 'Coolvetica', sans-serif;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+
+.music-controls.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.music-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 40px; 
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.music-toggle-btn:hover {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.music-toggle-btn:active {
+    transform: translateY(0px) scale(0.98);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.music-toggle-btn i {
+    font-size: 16px; 
+    transition: all 0.3s ease;
+}
+
+.music-toggle-btn.playing {
+    background: rgba(76, 175, 80, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(76, 175, 80, 0.3);
+    animation: musicPulse 2s ease-in-out infinite alternate;
+}
+
+.music-toggle-btn.muted {
+    background: rgba(255, 255, 255, 0.1); 
+    color: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes musicPulse {
+    0% {
+        box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+    }
+    100% {
+        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+    }
+}
+
+@media (max-width: 768px) {
+    .music-controls {
+        top: calc(15px + 50px + 15px);
+        left: 15px; 
+    }
+    
+    .music-toggle-btn {
+        width: 38px; 
+        height: 38px;
+    }
+    
+    .music-toggle-btn i {
+        font-size: 14px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .music-controls {
+        top: calc(15px + 45px + 12px);
+        left: 12px; 
+    }
+    
+    .music-toggle-btn {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .music-toggle-btn i {
+        font-size: 12px;
     }
 }
