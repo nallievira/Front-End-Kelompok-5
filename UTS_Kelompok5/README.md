@@ -141,50 +141,60 @@ _Screenshot Section Comment, komentar berhasil dihapus_
 ---
 
 ![Preview Website (Mobile Responsive)](./dokumentasi_ss/MobileResp_Homepage.png)
+![]
 _Screenshot halaman utama Rasa Sejarah Manado beserta tombol Music_
 
 ---
 
 ![](./dokumentasi_ss/MobileResp_BurgerMenu.png)
+![]
 _Screenshot Homepage Burger Menu_
 
 ---
 
 ![](./dokumentasi_ss/MobileResp_tentangRasa.png)
+![]
 _Screenshot Page "Tentang Rasa" (Carousel yang slideable)_
 
 ---
 
 ![](./dokumentasi_ss/MobileResp_SejarahPage.png)
+![]
 _Screenshot Page "Sejarah" menampilkan sejarah setiap makanan khas Manado_
 
 ---
 
 ![](./dokumentasi_ss/MobileResp_Search.png)
+![]
 _Screenshot bagian Search Bar_
 
 ---
 
 ![](./dokumentasi_ss/MobileResp_DetailMakanan.png)
+![]
 _Screenshot bagian Modal Popup Detail Makanan_
 
 ---
 
 ![](./dokumentasi_ss/MobileResp_CommentSection.png)
+![]
 _Screenshot bagian Modal Popup Comment Section_
 
 ---
 
 ![Preview Website (Tablet Mode)](./dokumentasi_ss/Tablet_homepage.png)
+![]
 _Screenshot halaman utama Rasa Sejarah Manado beserta tombol Music_
 
 ---
 
 ![](./dokumentasi_ss/Tablet_TentangRasaPage.png)
+![]
 _Screenshot halaman "Tentang Rasa" (Carousel yang slideable)_
 -------------------------------------------------------------------
 
 ![](./dokumentasi_ss/Tablet_SejarahPage.png)
+![]
 _Screenshot halaman "Sejarah" menampilkan sejarah setiap makanan khas Manado_
 -------------------------------------------------------------------
 
