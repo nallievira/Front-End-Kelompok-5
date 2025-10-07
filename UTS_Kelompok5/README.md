@@ -153,7 +153,7 @@ _Screenshot Homepage Burger Menu_
 ---
 
 ![](./dokumentasi_ss/MobileResp_tentangRasa.png)
-![]
+_____________________________________________________________________
 _Screenshot Page "Tentang Rasa" (Carousel yang slideable)_
 
 ---
