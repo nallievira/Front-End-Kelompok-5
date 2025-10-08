@@ -46,9 +46,9 @@ window.testModal = function(foodId) {
     openModal(foodId || 'tinutuan');
 };
 
-// Test function to check if everything is working
+//TES apakah setiap fungsi berfungsi dengan baik
 window.testFunctions = function() {
-    console.log('=== Function Test Results ===');
+    console.log('Function Test Results');
     console.log('setupScrollAnimation exists:', typeof setupScrollAnimation === 'function');
     console.log('setupEventListeners exists:', typeof setupEventListeners === 'function');
     console.log('setupCardEntryAnimation exists:', typeof setupCardEntryAnimation === 'function');
@@ -58,9 +58,9 @@ window.testFunctions = function() {
     console.log('=== End Test Results ===');
 };
 
-// Debug function to check modal comment buttons
+//fungsi debug untuk cek modal buttons
 window.checkModalButtons = function() {
-    console.log('=== Modal Button Check ===');
+    console.log('Modal Button Check');
     const modal = document.getElementById('food-modal');
     console.log('Modal visible:', modal?.classList.contains('is-visible'));
     
@@ -74,7 +74,7 @@ window.checkModalButtons = function() {
         console.log(`Delete button ${i} visible:`, btn.offsetWidth > 0 && btn.offsetHeight > 0);
         console.log(`Delete button ${i} styles:`, window.getComputedStyle(btn));
     });
-    console.log('=== End Modal Button Check ===');
+    console.log('End Modal Button Check');
 };
 
 //load halaman HTML
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupSearchSuggestions();
     setupModalComments();
     setupPageRouting();
-    setupMusicSystem(); // Add music system
+    setupMusicSystem(); 
 });
 
 //buat load komentar
@@ -100,13 +100,13 @@ function loadComments() {
     const stored = localStorage.getItem(COMMENT_KEY);
     allComments = stored ? JSON.parse(stored) : defaultComments;
     
-    // Ensure all comments have unique IDs
+    //komentar harus memiliki id unik
     ensureCommentIds();
     saveComments();
 }
 
 
-// Ensure all comments have unique IDs
+//memastikan setiap komen ada id unik
 function ensureCommentIds() {
     Object.keys(allComments).forEach(foodId => {
         if (allComments[foodId] && Array.isArray(allComments[foodId])) {
@@ -124,7 +124,7 @@ function saveComments() {
     localStorage.setItem(COMMENT_KEY, JSON.stringify(allComments));
 }
 
-// Edit comment functionality
+//edit komen
 function editComment(foodId, commentId, newText) {
     if (!allComments[foodId]) return false;
     
@@ -139,7 +139,7 @@ function editComment(foodId, commentId, newText) {
     return false;
 }
 
-// Delete comment functionality
+//delete comment
 function deleteComment(foodId, commentId) {
     if (!allComments[foodId]) {
         console.error('No comments found for foodId:', foodId);
@@ -258,7 +258,7 @@ function setupCommentSystem() {
 }
 
 
-// fungsi filter
+//fungsi filter
 function filterCarousel() {
     const searchTerm = document.getElementById('food-search').value.toLowerCase().trim();
     const carouselSlides = document.querySelectorAll('.carousel-slide');
@@ -440,11 +440,11 @@ function setupScrollAnimation() {
             $('.top-left-search').fadeOut(200);
         }
         
-        // Hide music controls when scrolling past intro section
+        //music control disembunyikan ketika user scroll
         const musicControls = document.getElementById('music-controls');
         if (musicControls) {
-            const introHeight = window.innerHeight; // Intro section is roughly viewport height
-            if (scrollY > introHeight * 0.8) { // Hide when 80% scrolled past intro
+            const introHeight = window.innerHeight; //bagian intro diset 100% viewport height
+            if (scrollY > introHeight * 0.8) { // music control disembunyikan ketika sudah sampai 80% scroll user
                 musicControls.classList.add('hidden');
             } else {
                 musicControls.classList.remove('hidden');
