@@ -141,50 +141,60 @@ _Screenshot Section Comment, komentar berhasil dihapus_
 ---
 
 ![Preview Website (Mobile Responsive)](./dokumentasi_ss/MobileResp_Homepage.png)
+_____________________________________________________________________
 _Screenshot halaman utama Rasa Sejarah Manado beserta tombol Music_
 
 ---
 
 ![](./dokumentasi_ss/MobileResp_BurgerMenu.png)
+_____________________________________________________________________
 _Screenshot Homepage Burger Menu_
 
 ---
 
 ![](./dokumentasi_ss/MobileResp_tentangRasa.png)
+_____________________________________________________________________
 _Screenshot Page "Tentang Rasa" (Carousel yang slideable)_
 
 ---
 
 ![](./dokumentasi_ss/MobileResp_SejarahPage.png)
+_____________________________________________________________________
 _Screenshot Page "Sejarah" menampilkan sejarah setiap makanan khas Manado_
 
 ---
 
 ![](./dokumentasi_ss/MobileResp_Search.png)
+_____________________________________________________________________
 _Screenshot bagian Search Bar_
 
 ---
 
 ![](./dokumentasi_ss/MobileResp_DetailMakanan.png)
+_____________________________________________________________________
 _Screenshot bagian Modal Popup Detail Makanan_
 
 ---
 
 ![](./dokumentasi_ss/MobileResp_CommentSection.png)
+_____________________________________________________________________
 _Screenshot bagian Modal Popup Comment Section_
 
 ---
 
 ![Preview Website (Tablet Mode)](./dokumentasi_ss/Tablet_homepage.png)
+_____________________________________________________________________
 _Screenshot halaman utama Rasa Sejarah Manado beserta tombol Music_
 
 ---
 
 ![](./dokumentasi_ss/Tablet_TentangRasaPage.png)
+_____________________________________________________________________
 _Screenshot halaman "Tentang Rasa" (Carousel yang slideable)_
 -------------------------------------------------------------------
 
 ![](./dokumentasi_ss/Tablet_SejarahPage.png)
+_____________________________________________________________________
 _Screenshot halaman "Sejarah" menampilkan sejarah setiap makanan khas Manado_
 -------------------------------------------------------------------
 
