@@ -55,7 +55,7 @@ window.testFunctions = function() {
     console.log('setupCarousel exists:', typeof setupCarousel === 'function');
     console.log('openModal exists:', typeof openModal === 'function');
     console.log('DOM loaded:', document.readyState);
-    console.log('=== End Test Results ===');
+    console.log('End Test Results');
 };
 
 //fungsi debug untuk cek modal buttons
@@ -547,8 +547,8 @@ function updateStarDisplay(foodId, rating) {
     if (starRating) {
         const stars = starRating.querySelectorAll('.star');
         stars.forEach((star, index) => {
-            const starRating = index + 1;
-            star.classList.toggle('active', starRating <= rating);
+            const starValue = index + 1;
+            star.classList.toggle('active', starValue <= rating);
             star.classList.remove('hover-effect');
         });
     }
@@ -560,8 +560,8 @@ function updateModalStarDisplay(foodId) {
         const rating = getRating(foodId);
         const stars = modalStarRating.querySelectorAll('.star');
         stars.forEach((star, index) => {
-            const starRating = index + 1;
-            star.classList.toggle('active', starRating <= rating);
+            const starValue = index + 1;
+            star.classList.toggle('active', starValue <= rating);
             star.classList.remove('hover-effect');
         });
     }
@@ -570,23 +570,25 @@ function updateModalStarDisplay(foodId) {
 function highlightStars(container, rating) {
     const stars = container.querySelectorAll('.star');
     stars.forEach((star, index) => {
-        const starRating = index + 1;
-        star.classList.toggle('hover-effect', starRating <= rating);
-        star.classList.toggle('active', starRating <= rating);
+        const starValue = index + 1;
+        star.classList.toggle('hover-effect', starValue <= rating);
+        star.classList.toggle('active', starValue <= rating);
     });
 }
 
 function setupModalStarClickHandler(modalStarRating) {
     const stars = modalStarRating.querySelectorAll('.star');
-    const foodId = modalStarRating.getAttribute('data-food-id');
     
     stars.forEach((star) => {
         const rating = parseInt(star.getAttribute('data-rating'));
         
         star.addEventListener('click', (e) => {
             e.stopPropagation();
-            setRating(foodId, rating);
-            updateModalStarDisplay(foodId);
+            const foodId = modalStarRating.getAttribute('data-food-id');
+            if (foodId) {
+                setRating(foodId, rating);
+                updateModalStarDisplay(foodId);
+            }
         });
         
         star.addEventListener('mouseenter', () => {
@@ -595,7 +597,10 @@ function setupModalStarClickHandler(modalStarRating) {
     });
     
     modalStarRating.addEventListener('mouseleave', () => {
-        updateModalStarDisplay(foodId);
+        const foodId = modalStarRating.getAttribute('data-food-id');
+        if (foodId) {
+            updateModalStarDisplay(foodId);
+        }
     });
 }
 
