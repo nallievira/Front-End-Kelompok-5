@@ -5,10 +5,10 @@ Website kuliner interaktif yang menampilkan kekayaan cita rasa dan sejarah makan
 ## Link Video Youtube
 ### Video Presentasi (HTML, CSS & JS)
 - [@nallievira](https://github.com/nallievira) - _Ellen Elvira (535240023)_
-  Link:
+  Link: https://www.youtube.com/watch?v=NCGgLN3UbnQ
 ### Video Demo Website Rasa Manado
 - [@Howard014](https://github.com/Howard014) - _Howard Dominikov Oei (535240014)_
-  Link:
+  Link: https://youtu.be/YHM5uw2ZiFo?si=OgE-gXJe8y2RJSvC
   
 ## Kontribusi
 
