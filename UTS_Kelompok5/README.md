@@ -1,6 +1,6 @@
 # Rasa Sejarah Manado
 
-Website kuliner interaktif yang menampilkan kekayaan cita rasa dan sejarah makanan khas Manado. Jelajahi warisan kuliner Minahasa melalui pengalaman web yang modern dan responsif dengan sistem musik latar yang seamless.
+Website kuliner interaktif yang menampilkan kekayaan cita rasa dan sejarah makanan khas Manado. Jelajahi warisan kuliner melalui pengalaman web yang modern dan responsif dengan sistem musik latar yang seamless.
 
 ## Link Video Youtube
 ### Video Presentasi (HTML, CSS & JS)
