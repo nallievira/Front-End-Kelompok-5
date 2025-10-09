@@ -3,8 +3,10 @@
 Website kuliner interaktif yang menampilkan kekayaan cita rasa dan sejarah makanan khas Manado. Jelajahi warisan kuliner Minahasa melalui pengalaman web yang modern dan responsif dengan sistem musik latar yang seamless.
 
 ## Link Video Youtube
+### Video Presentasi (HTML, CSS & JS)
 - [@nallievira](https://github.com/nallievira) - _Ellen Elvira (535240023)_
   Link:
+### Video Demo Website Rasa Manado
 - [@Howard014](https://github.com/Howard014) - _Howard Dominikov Oei (535240014)_
   Link:
   
